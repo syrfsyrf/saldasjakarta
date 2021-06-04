@@ -26,7 +26,7 @@
 							</div>
 							<label for="KodeDermaga" class="col-sm-2 col-form-label">Kategori</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="KodeDermaga" name="KodeDermaga" placeholder="..." value="<?php echo $row->jenis_kategori;?>">
+								<input type="text" class="form-control" id="KodeDermaga" name="KodeDermaga" placeholder="..." value="<?php echo $row->kategori;?>">
 							</div>
 						</div>
 						<div class="form-group row">
@@ -62,7 +62,7 @@
 						<div class="form-group row">
 							<label for="password" class="col-sm-2 col-form-label">Jenis Harga</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="password" name="password" placeholder="..." value="<?php echo $row->jenis_harga;?>">
+								<input type="text" class="form-control" id="password" name="password" placeholder="..." value="<?php echo $row->jenis_harga_detail;?>">
 							</div>
                             <label for="password" class="col-sm-2 col-form-label">Tanggal Expired</label>
 							<div class="col-sm-4">

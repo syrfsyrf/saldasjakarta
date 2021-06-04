@@ -3,7 +3,7 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Produk</h1>
+        <h1 class="h3 mb-0 text-gray-800">Approve</h1>
     </div>
 
     <!-- Content Row -->
@@ -16,8 +16,8 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Total Produk</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php foreach($getCountTotalProd->result() as $row): echo $row->total_produk; endforeach;?></div>
+                            Approved</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php foreach($getAprovedTrans->result() as $row): echo $row->count_approved; endforeach;?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -34,8 +34,8 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Stok Hampir Kadaluarsa</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php foreach($getHampirExpProd->result() as $row): echo $row->jumlah_prod_exp.' Produk'; endforeach;?></div>
+                            Pending</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php foreach($getPendingTrans->result() as $row): echo $row->count_pending; endforeach;?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -52,8 +52,8 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Stok Hampir Habis</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php foreach($getHampirHabisProd->result() as $row): echo $row->jumlah_prod_hampir_habis.' Produk'; endforeach;?></div>
+                            Rejected</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php foreach($getRejectedTrans->result() as $row): echo $row->count_rejected; endforeach;?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -72,55 +72,43 @@
         <div class="col-xl-12 col-lg-12">
             <div class="card shadow mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Data Produk</h6>
-                    <div class="dropdown no-arrow">
-                        <a href="<?php echo base_url('Produk/tambah_produk');?>" class="btn btn-primary btn-icon-split"><span class="text">Tambah Produk</span></a>
-                    </div>
+                    <h6 class="m-0 font-weight-bold text-primary">Pending Approval</h6>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTableProduk" width="100%" cellspacing="0">
+                        <table class="table table-bordered" id="dataTableApprove" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>Nama Produk</th>
-                                    <th>Harga Produk</th>
-                                    <th>Expired</th>
-                                    <th>Stock Tersedia</th>
+                                    <th>Transaction ID</th>
+                                    <th>Metode Pembayaran</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                    <th>Receipt</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th>Nama Produk</th>
-                                    <th>Harga Produk</th>
-                                    <th>Expired</th>
-                                    <th>Stock Tersedia</th>
+                                    <th>Transaction ID</th>
+                                    <th>Metode Pembayaran</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                    <th>Receipt</th>
                                     <th>Aksi</th>
                                 </tr>
                             </tfoot>
                             <tbody>
-                                <?php foreach($getproduk->result() as $row): ?>
+                                <?php foreach($getPendingPesanan->result() as $row): ?>
                                     <tr>
-                                        <td><?php echo $row->nama_produk;?></td>
+                                        <td><?php echo $row->transaction_id;?></td>
+                                        <td><?php echo $row->metode_pembayaran;?></td>
+                                        <td><?php echo $row->total;?></td>
+                                        <td><?php echo $row->dstatus;?></td>
                                         <td>
-                                            <?php if ($row->harga == NULL) {
-                                                echo "-";
-                                            } else { ?>
-                                                Rp <?php echo $row->harga.$row->jenis_harga_detail;?>
-                                            <?php } ?>
-                                        </td>
-                                        <td>
-                                            <?php if ($row->keterangan_exp == NULL) {
-                                                echo "-";
-                                            } else { ?>
-                                                <?php echo $row->keterangan_exp;?>
-                                            <?php } ?>
-                                        </td>
-                                        <td>
-                                            <?php if ($row->keterangan_stock == NULL) {
-                                                echo "-";
-                                            } else { ?>
-                                                <?php echo $row->keterangan_stock;?>
+                                            <?php if ($row->file == NULL) { ?>
+                                                <button class="btn btn-danger btn-icon-split"><span class="text">Receipt Not Available</span></button>
+                                            <?php } else { ?>
+                                                <button class="btn btn-warning btn-icon-split"><span class="text">Receipt Available</span></button>
                                             <?php } ?>
                                         </td>
                                         <td>
@@ -129,12 +117,7 @@
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="fas fa-ellipsis-v fa-sm fa-fw "></i></a>
                                                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                                    <?php if ($row->harga == NULL && $row->tgl_expired == NULL && $row->jumlah_stok == NULL) { ?>
-                                                        <a class="dropdown-item" href="<?php echo base_url('produk/tambah_stok/'.$row->id_produk);?>">Tambah Stok</a>
-                                                    <?php } else { ?>
-                                                        <a class="dropdown-item" href="<?php echo base_url('produk/edit/'.$row->id_produk);?>">Edit</a>
-                                                        <a class="dropdown-item" href="<?php echo base_url('produk/tambah_stok/'.$row->id_produk);?>">Tambah Stok Baru</a>
-                                                    <?php } ?>
+                                                    <a class="dropdown-item" href="<?php echo base_url('Pembayaran/detail/'.$row->id_pesanan);?>">Detail</a>
                                                 </div>
                                             </div>
                                         </td>

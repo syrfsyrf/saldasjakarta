@@ -1,18 +1,17 @@
 <?php
 
-class registrasi extends CI_Controller{
+class Registrasi extends CI_Controller{
 
     public function __construct(){
         parent::__construct();
 
-        /* if($this->session->userdata('role_id') != '1'){
-            $this->session->set_flashdata('pesan',
-            '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                Anda Belum Login!
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>');
-            redirect('auth/login');
-        } */
+        if(!isset($_SESSION['logged_in']['username']) && $_SESSION['logged_in']['aktivasi'] != '1'){                                
+            redirect('Login');
+        } else {
+            if ($_SESSION['logged_in']['role'] == '5') {
+                redirect();
+            }
+        }
     }
 
     public function registrasi()

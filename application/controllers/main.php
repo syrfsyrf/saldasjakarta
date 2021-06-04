@@ -1,18 +1,10 @@
 <?php
 
-class main extends CI_Controller{
+class Main extends CI_Controller{
 
     public function __construct(){
         parent::__construct();
-
-        /* if($this->session->userdata('role_id') != '1'){
-            $this->session->set_flashdata('pesan',
-            '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                Anda Belum Login!
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>');
-            redirect('auth/login');
-        } */
+        $this->load->model('m_order');
     }
 
     public function index()
@@ -24,12 +16,9 @@ class main extends CI_Controller{
 
     public function kategori_produk()
     {
+        $data['getKategori'] = $this->m_order->getKategori('PHP');
         $this->load->view('templates_frontend/v_header');
-        $this->load->view('templates_frontend/kategori_produk/v_dagingsapi.php');
-        $this->load->view('templates_frontend/kategori_produk/v_dagingayam.php');
-        $this->load->view('templates_frontend/kategori_produk/v_dagingikan.php');
-        $this->load->view('templates_frontend/kategori_produk/v_frozenfood.php');
-        $this->load->view('templates_frontend/kategori_produk/v_homemade.php');
+        $this->load->view('templates_frontend/kategori_produk/v_kat_produk', $data);
         $this->load->view('templates_frontend/v_footer');   
     }
 
@@ -63,8 +52,25 @@ class main extends CI_Controller{
 
     public function bayar()
     {
+        $data['paymentMethod'] = $this->m_order->paymentMethod();
         $this->load->view('templates_frontend/v_header');
-        $this->load->view('templates_frontend/bayar/v_bayar');
+        $this->load->view('templates_frontend/bayar/v_bayar', $data);
+        $this->load->view('templates_frontend/v_footer');   
+    }
+
+    public function myOrder()
+    {
+        $data['getUserOrder'] = $this->m_order->getUserOrder();
+        $this->load->view('templates_frontend/v_header');
+        $this->load->view('templates_frontend/keranjang/v_myOrder', $data);
+        $this->load->view('templates_frontend/v_footer');   
+    }
+
+    public function detail($id)
+    {
+        $data['getPesanan'] = $this->m_order->getPesanan($id);
+        $this->load->view('templates_frontend/v_header');
+        $this->load->view('templates_frontend/keranjang/v_detail', $data);
         $this->load->view('templates_frontend/v_footer');   
     }
 }
