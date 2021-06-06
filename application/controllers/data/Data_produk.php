@@ -83,7 +83,8 @@ class Data_produk extends CI_Controller{
             $status_sukses_file = 'SUKSES';
             $result = $this->m_file->updateProduk($id_produk, $filename, $path);
             if ($result == TRUE) {
-                echo $status_sukses_file;
+                // echo $status_sukses_file;
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
             } else {
                 echo "gagal";
             }

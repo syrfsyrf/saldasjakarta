@@ -39,7 +39,8 @@ class Master extends CI_Controller{
         $jenis = $this->input->post('jenis');
         $result = $this->m_master->insertKategori($jenis);
         if ($result == TRUE) {
-            echo "sukses";
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            // echo "sukses";
         } else {
             echo "gagal";
         }
@@ -73,7 +74,8 @@ class Master extends CI_Controller{
         );
         $result = $this->m_master->insertjenisHarga($data);
         if ($result == TRUE) {
-            echo "sukses";
+            // echo "sukses";
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
         } else {
             echo "gagal";
         }

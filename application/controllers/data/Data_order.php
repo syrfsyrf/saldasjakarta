@@ -159,7 +159,8 @@ class Data_order extends CI_Controller{
             $status_sukses_file = 'SUKSES';
             $result = $this->m_file->updateReceipt($id_pesanan, $filename, $directory);
             if ($result == TRUE) {
-                echo $status_sukses_file;
+                // echo $status_sukses_file;
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
             } else {
                 echo "gagal";
             }

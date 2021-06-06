@@ -36,7 +36,8 @@ class Data_transaksi extends CI_Controller{
         // print_r($data);
         $result = $this->m_pembayaran->approvePembayaran($id_pesanan, $data, $tgl_pembayaran);
         if ($result == TRUE) {
-            echo "sukses";
+            // echo "sukses";
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
         } else {
             echo "Gagal";
         }
