@@ -1,5 +1,3 @@
-console.log('ok');
-
 base_url = 'http://localhost/saldasjakarta/';
 
 var id_pesanan = 'NULL';
@@ -44,7 +42,22 @@ function getDetailOrder(id, param){
 		success : function(data){
                 if (!$.trim(data)){   /*
                 	alert('No Available Stock');*/
-                	console.log('empty getDetailOrder');
+                	// console.log('empty getDetailOrder');
+                        html = 
+                          '<div class="cart-row">'+
+                          '<div class="cart-item cart-column">'+
+                          '<div class="p-3 bg-success text-white">'+
+                          '<div class="row">'+
+                          '<div class="col-md-5">'+
+                          'Empty'+
+                          '</div>'+
+                          '<div class="col-md-3"></div>'+
+                          '<div class="col-md-3"></span></div>'+
+                          '<div class="col-md-1"></div>'+
+                          '</div>'+
+                          '</div>'+
+                          '</div>'+
+                          '</div>';
                 } else {
                     if (param == 'DETAIL') {
                         sumOrder(id);

@@ -38,12 +38,11 @@ class m_produk extends CI_Model {
 	{
 		if ($param == 'edit') {
 			$condition = "AND c.status = '1'";
-		} else {
+			$hasil = $this->db->query("SELECT a.id as 'id_produk', a.nama as 'nama_produk', b.jenis as 'kategori', c.id as 'id_stock', a.deskripsi, (SELECT nama FROM mst_user WHERE id = a.created_by) as 'created_by', a.insert_date as 'insert_date', a.file, a.path, c.jumlah_stok as 'jumlah_stok', c.harga as 'harga', c.jenis_harga_detail as 'jenis_harga_detail', c.jenis_harga as 'jenis_harga', c.tgl_expired as 'tgl_expired', c.status as 'status' FROM mst_produk a JOIN mst_kategori b ON a.id_kategori = b.id LEFT JOIN stock c ON a.id = c.id_produk WHERE a.id = '".$value."' ".$condition);
+		} elseif($param == 'stock_detail') {
 			$condition = "";
+			$hasil = $this->db->query("SELECT a.id as 'id_produk', a.nama as 'nama_produk', b.jenis as 'kategori', c.id as 'id_stock', a.deskripsi, (SELECT nama FROM mst_user WHERE id = a.created_by) as 'created_by', a.insert_date as 'insert_date', a.file, a.path, c.jumlah_stok as 'jumlah_stok', c.harga as 'harga', c.jenis_harga_detail as 'jenis_harga_detail', c.jenis_harga as 'jenis_harga', c.tgl_expired as 'tgl_expired', c.status as 'status', (SELECT jenis FROM mst_jenis_harga WHERE id = jenis_harga) as 'djenis_harga' FROM mst_produk a JOIN mst_kategori b ON a.id_kategori = b.id LEFT JOIN stock c ON a.id = c.id_produk WHERE a.id = '".$value."' ".$condition);
 		}
-		$hasil = $this->db->query("SELECT a.id as 'id_produk', a.nama as 'nama_produk', b.jenis as 'kategori', c.id as 'id_stock', a.deskripsi, (SELECT nama FROM mst_user WHERE id = a.created_by) as 'created_by', a.insert_date as 'insert_date',
-		c.jumlah_stok as 'jumlah_stok', c.harga as 'harga', c.jenis_harga_detail as 'jenis_harga_detail', c.jenis_harga as 'jenis_harga', c.tgl_expired as 'tgl_expired', c.status as 'status' FROM mst_produk a JOIN mst_kategori b ON a.id_kategori = b.id LEFT JOIN stock c ON a.id = c.id_produk 
-		WHERE a.id = '".$value."' ".$condition);
 		return $hasil;
 	}
 

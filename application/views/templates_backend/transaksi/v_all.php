@@ -58,10 +58,7 @@
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="fas fa-ellipsis-v fa-sm fa-fw "></i></a>
                                                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                                    <a class="dropdown-item" href="<?php echo base_url('transaksi/detail/'.$row->id);?>">Detail</a>
-                                                    <?php if ($row->is_approved == '2' || $row->is_approved == NULL) { ?>
-                                                        <a class="dropdown-item" href="#">Review Pembayaran</a>
-                                                    <?php } ?>
+                                                    <a class="dropdown-item" href="<?php echo base_url('Pembayaran/detail/'.$row->id);?>">Detail</a>
                                                 </div>
                                             </div>
                                         </td>

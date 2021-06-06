@@ -10,7 +10,7 @@
                     <ul class="product-category">
                         <li><a href="javascript:getOrder('1', 'ALL');" class="active">All</a></li>
                         <?php foreach($getKategori->result() as $row): ?>
-                            <li><a href="javascript:getOrder(<?php echo $row->id;?>, 'SPESIFIK');"><?php echo $row->jenis;?></a></li>
+                            <li><a href="javascript:getOrder(<?php echo $row->id;?>, 'SPESIFIK');" class="active"><?php echo $row->jenis;?></a></li>
                         <?php endforeach; ?>
                     </ul>
                 </div>
@@ -43,21 +43,6 @@
                     </div>
                 </div>
             </div>
-            <div class="row mt-5">
-          <div class="col text-center">
-            <div class="block-27">
-              <ul>
-                <li><a href="#">&lt;</a></li>
-                <li class="active"><span>1</span></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&gt;</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
         </div>
     </section>
 <script src="<?php echo base_url() ?>/assets/backend/js/product.js"></script>

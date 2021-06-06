@@ -15,11 +15,6 @@
 
 				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 					<h6 class="m-0 font-weight-bold text-primary">Kategori</h6>
-					<div class="dropdown no-arrow">
-						<a href="<?php echo base_url('Produk/tambah');?>" class="btn btn-primary btn-icon-split">
-							<span class="text">Kategori Tidak Ditemukan?</span>
-						</a>
-					</div>
 				</div>
 
 				<div class="card-body">

@@ -25,7 +25,7 @@ class m_order extends CI_Model {
 		} else {
 			$condition ="a.id_kategori = '".$id."' AND";
 		}
-		$hasil = $this->db->query("SELECT * FROM (SELECT (SELECT jenis FROM mst_kategori WHERE id = id_kategori) as 'kategori', a.nama, b.jumlah_stok, b.id AS 'id_stock', FORMAT(b.harga, 'c') as 'harga', (SELECT jenis FROM mst_jenis_harga WHERE id = b.jenis_harga) AS 'jenis_harga_detail', (jumlah_stok - used_stok) AS 'sisa_stok',
+		$hasil = $this->db->query("SELECT * FROM (SELECT (SELECT jenis FROM mst_kategori WHERE id = id_kategori) as 'kategori', a.nama, a.file, a.path, b.jumlah_stok, b.id AS 'id_stock', FORMAT(b.harga, 'c') as 'harga', (SELECT jenis FROM mst_jenis_harga WHERE id = b.jenis_harga) AS 'jenis_harga_detail', (jumlah_stok - used_stok) AS 'sisa_stok',
 			CASE
 			WHEN b.tgl_expired < SYSDATE() THEN 'EXPIRED'
 			ELSE 'AVAILABLE'
@@ -216,9 +216,9 @@ class m_order extends CI_Model {
 
 	public function getPesanan($id, $param = FALSE){
 		if ($param == 'BACKEND') {
-			$hasil = $this->db->query("SELECT a.id AS 'id_pesanan', a.transaction_id, (SELECT jenis FROM mst_metode_pembayaran WHERE id = a.metode_pembayaran) AS 'metode_pembayaran', a.total, (SELECT detail FROM tb_status_pesanan WHERE id = a.status) AS 'status', a.status AS 'dstatus', DATE_FORMAT(a.tgl_pembayaran, '%d %M %Y') as 'tgl_pembayaran', b.file, b.directory FROM pesanan a JOIN order_job b ON a.id = b.id_pesanan WHERE a.id = '".$id."'");
+			$hasil = $this->db->query("SELECT a.id AS 'id_pesanan', a.transaction_id, (SELECT jenis FROM mst_metode_pembayaran WHERE id = a.metode_pembayaran) AS 'metode_pembayaran', a.total, (SELECT detail FROM tb_status_pesanan WHERE id = a.status) AS 'status', a.status AS 'dstatus', DATE_FORMAT(a.tgl_pembayaran, '%d %M %Y') as 'tgl_pembayaran', DATE_FORMAT(a.tgl_pembayaran, '%Y-%d-%m') as 'dtgl_pembayaran', b.file, b.directory FROM pesanan a LEFT JOIN order_job b ON a.id = b.id_pesanan WHERE a.id = '".$id."'");
 		} else {
-			$hasil = $this->db->query("SELECT a.id AS 'id_pesanan', a.transaction_id, (SELECT jenis FROM mst_metode_pembayaran WHERE id = a.metode_pembayaran) AS 'metode_pembayaran', a.total, (SELECT detail FROM tb_status_pesanan WHERE id = a.status) AS 'status', a.status AS 'dstatus', DATE_FORMAT(a.tgl_pembayaran, '%d %M %Y') as 'tgl_pembayaran', b.file, b.directory FROM pesanan a JOIN order_job b ON a.id = b.id_pesanan WHERE a.transaction_id = '".$id."'");
+			$hasil = $this->db->query("SELECT a.id AS 'id_pesanan', a.transaction_id, (SELECT jenis FROM mst_metode_pembayaran WHERE id = a.metode_pembayaran) AS 'metode_pembayaran', a.total, (SELECT detail FROM tb_status_pesanan WHERE id = a.status) AS 'status', a.status AS 'dstatus', DATE_FORMAT(a.tgl_pembayaran, '%d %M %Y') as 'tgl_pembayaran', DATE_FORMAT(a.tgl_pembayaran, '%Y-%d-%m') as 'dtgl_pembayaran', b.file, b.directory FROM pesanan a LEFT JOIN order_job b ON a.id = b.id_pesanan WHERE a.transaction_id = '".$id."'");
 		}
 		return $hasil;
 	}

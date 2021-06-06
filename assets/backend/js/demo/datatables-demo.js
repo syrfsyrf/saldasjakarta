@@ -32,4 +32,26 @@ $(document).ready(function() {
       "responsive": true,
       "order": [[ 0, "desc" ]]
     });
+
+  $('#dataTableKategori').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+      "order": [[ 0, "desc" ]]
+    });
+
+  $('#dataReport').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+      "order": [[ 3, "desc" ]]
+    });
 });

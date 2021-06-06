@@ -39,40 +39,75 @@
 								<input type="text" class="form-control" id="password" name="password" placeholder="..." value="<?php echo $row->insert_date;?>">
 							</div>
 						</div>
-					</div>
-					<!-- /.card-body -->
-				</div>
-                <div class="card shadow mb-4">
-
-					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">Harga & Stok</h6>
-					</div>
-
-					<div class="card-body">
+						<form method="post" action="<?php echo base_url('data/Data_produk/uploadProduk');?>" enctype="multipart/form-data">
 						<div class="form-group row">
-							<label for="user" class="col-sm-2 col-form-label">Harga</label>
-							<div class="col-sm-4">
-								<input type="text" class="form-control" id="user" name="user" placeholder="..." value="<?php echo $row->harga;?>">
-							</div>
-							<label for="KodeDermaga" class="col-sm-2 col-form-label">Jumlah Stok</label>
-							<div class="col-sm-4">
-								<input type="text" class="form-control" id="KodeDermaga" name="KodeDermaga" placeholder="..." value="<?php echo $row->jumlah_stok;?>">
-							</div>
+							<?php if ($row->file != NULL && $row->path != NULL) { ?>
+								<a href="<?php echo base_url('data/Data_produk/download/').$row->id_produk;?>" class="form-control btn btn-primary">Download Gambar Produk</a>
+							<?php } else { ?>
+								
+									<label for="password" class="col-sm-2 col-form-label">Gambar Produk</label>
+									<div class="col-sm-4">
+										<input type="file" required class="form-control" id="file_produk" name="file_produk" placeholder="...">
+										<input type="hidden" class="form-control" id="id_produk" name="id_produk" placeholder="..." value="<?php echo $row->id_produk;?>">
+									</div>
+									<label for="password" class="col-sm-2 col-form-label"></label>
+									<div class="col-sm-4">
+										<button class="btn btn-primary btn-icon-split" type="Submit"><span class="text">Upload Gambar</span></button>
+									</div>
+							<?php } ?>
 						</div>
-						<div class="form-group row">
-							<label for="password" class="col-sm-2 col-form-label">Jenis Harga</label>
-							<div class="col-sm-4">
-								<input type="text" class="form-control" id="password" name="password" placeholder="..." value="<?php echo $row->jenis_harga_detail;?>">
-							</div>
-                            <label for="password" class="col-sm-2 col-form-label">Tanggal Expired</label>
-							<div class="col-sm-4">
-								<input type="date" class="form-control" id="password" name="password" placeholder="..." value="<?php echo $row->tgl_expired;?>">
-							</div>
-						</div>
+								</form>
 					</div>
 					<!-- /.card-body -->
 				</div>
 				<?php endforeach; ?>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <!-- Area Chart -->
+        <div class="col-xl-12 col-lg-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Stock</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTableProduk" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Tanggal Expired</th>
+                                    <th>Jumlah Stock</th>
+                                    <th>Harga</th>
+                                    <th>Jenis Harga</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Tanggal Expired</th>
+                                    <th>Jumlah Stock</th>
+                                    <th>Harga</th>
+                                    <th>Jenis Harga</th>
+                                    <th>Status</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                            	<?php foreach($getproduk2->result() as $row): ?>
+                            		<tr>
+                            			<td><?php echo $row->tgl_expired;?></td>
+                            			<td><?php echo $row->jumlah_stok;?></td>
+                            			<td><?php echo $row->harga;?></td>
+                            			<td><?php echo $row->djenis_harga;?></td>
+                            			<td><?php if($row->status == '1'){ echo "Aktif"; } else {echo "Non Aktif";}?></td>
+                            		</tr>
+                            	<?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

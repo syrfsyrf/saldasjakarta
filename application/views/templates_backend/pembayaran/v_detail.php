@@ -46,6 +46,12 @@
 									<?php } ?>
 								</div>
 							</div>
+							<div class="form-group row">
+								<label for="password" class="col-sm-12 col-form-label">Tanggal Pembayaran</label>
+								<div class="col-sm-12">
+									<input type="date" class="form-control" placeholder="..." required id="tgl_pembayaran" name="tgl_pembayaran" value="<?php echo $row->dtgl_pembayaran; ?>">
+								</div>
+							</div>
 						</div>
 						<!-- /.card-body -->
 					</div>
@@ -69,15 +75,19 @@
 						</div>
 					</div>
 					<br>
-					<div class="row">
-						<div class="col-md-6">
-							<input id="submit-reject" type="submit" class="btn btn-danger btn-block" name="submit" value="Reject">
+					<?php if ($row->dstatus == '3' && $row->file != NULL) { ?>
+						<div class="row">
+							<div class="col-md-6">
+								<input id="submit-reject" type="submit" class="btn btn-danger btn-block" name="submit" value="Reject">
+							</div>
+							<div class="col-md-6">
+								<!-- <button class="btn btn-primary btn-block"><span class="text">Approve</span></button>   -->
+								<input id="submit-approve" type="submit" class="btn btn-primary btn-block" name="submit" value="Approve">
+							</div>
 						</div>
-						<div class="col-md-6">
-							<!-- <button class="btn btn-primary btn-block"><span class="text">Approve</span></button>   -->
-							<input id="submit-approve" type="submit" class="btn btn-primary btn-block" name="submit" value="Approve">
-						</div>
-					</div>
+					<?php } else { ?>
+
+					<?php } ?>
 				</div>
 			</div>
 		</form>

@@ -9,13 +9,13 @@ class m_pembayaran extends CI_Model {
 		return $hasil;
 	}
 
-	public function approvePembayaran($id_pesanan, $data){
+	public function approvePembayaran($id_pesanan, $data, $tgl_pembayaran){
 		$this->db->trans_start();
 		$this->db->where('id_pesanan', $id_pesanan);
 		$this->db->update('order_job', $data);
 		if ($data['status'] == '1') {
 			$this->db->query("
-			UPDATE pesanan SET tgl_pembayaran = now(), status = '1', is_approved = 1 WHERE id = '".$id_pesanan."'");
+			UPDATE pesanan SET tgl_pembayaran = '".$tgl_pembayaran."', status = '1', is_approved = 1 WHERE id = '".$id_pesanan."'");
 
 			$array['data_stock'] = $this->db->query("SELECT id FROM pesanan_detail WHERE id_pesanan = '".$id_pesanan."'");
 			foreach($array['data_stock']->result() as $row ):

@@ -23,6 +23,7 @@ class Data_transaksi extends CI_Controller{
         $id_pesanan = $this->input->post('id_pesanan');
         $transaction_id = $this->input->post('transaction_id');
         $type = $this->input->post('submit');
+        $tgl_pembayaran = $this->input->post('tgl_pembayaran');
         if ($type == 'Approve') {
             $status = 1;
         } elseif($type == 'Reject') {
@@ -33,11 +34,25 @@ class Data_transaksi extends CI_Controller{
             'approved_by' => $_SESSION['logged_in']['id_user'],
             'approved_date' => date("Y-m-d H:i:s"));
         // print_r($data);
-        $result = $this->m_pembayaran->approvePembayaran($id_pesanan, $data);
+        $result = $this->m_pembayaran->approvePembayaran($id_pesanan, $data, $tgl_pembayaran);
         if ($result == TRUE) {
             echo "sukses";
         } else {
             echo "Gagal";
         }
+    }
+
+    public function getAuditData(){
+        $dateStart = $this->input->post('dateStart');
+        $dateEnd = $this->input->post('dateEnd');
+        $hasil = $this->m_transaksi->getAuditData($dateStart, $dateEnd);
+        echo json_encode($hasil);
+    }
+
+    public function generateReport(){
+        $year = $this->input->post('year');
+        $month = $this->input->post('month');
+        $hasil = $this->m_transaksi->generateReport($year, $month);
+        echo json_encode($hasil);
     }
 }
