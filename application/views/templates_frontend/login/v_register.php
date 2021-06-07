@@ -32,7 +32,7 @@
 <body class="goto-here">
   <section class="ftco-section">
     <div class="container">
-      <form action="<?php echo base_url('login/do_register'); ?>" method="post" class="info">
+      <form action="<?php echo base_url('Login/do_register'); ?>" method="post" class="info">
       <div class="row justify-content-end">
         <div class="col-lg-1 mt-5 cart-wrap ftco-animate">
 
@@ -58,6 +58,7 @@
                 <label for="country">No Telp</label>
                 <input type="text" class="form-control text-left px-3" name="telp" required placeholder="">
               </div>
+              <p><a href="<?php echo base_url('Login'); ?>">Sudah Punya Akun?</a></p>
             </div>
         </div>
         <div class="col-lg-5 mt-5 cart-wrap ftco-animate">

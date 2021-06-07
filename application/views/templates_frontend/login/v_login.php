@@ -38,7 +38,7 @@
                 </div>
                 
                 <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-                    <form action="<?php echo base_url('login/do_login'); ?>" method="post" class="info">
+                    <form action="<?php echo base_url('Login/do_login'); ?>" method="post" class="info">
                     <div class="cart-total mb-3">
                         <h3>Login</h3>
                         <?php echo $this->session->flashdata('message');?>

@@ -10,10 +10,6 @@ class Data_order extends CI_Controller{
         $this->load->helper(array('url','download'));   
 
         $this->uploadPath = "./assets/uploaded/receipt";
-
-        if(!isset($_SESSION['logged_in']['username']) && $_SESSION['logged_in']['aktivasi'] != '1'){                                
-            redirect('Login');
-        }
     }
 
     public function getKategori($param){

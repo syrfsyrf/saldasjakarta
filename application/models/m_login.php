@@ -67,4 +67,11 @@ class m_login extends CI_model{
 			}
 		}
     }
+
+    public function reset_password($id, $data){
+		$query = $this->db->where('id', $id)
+		->set($data)
+		->update('mst_user');
+		return $query;
+	}
 }

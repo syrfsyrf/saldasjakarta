@@ -13,7 +13,7 @@ class Login extends CI_Controller{
     public function index() {
         if(isset($_SESSION['logged_in']['username'])){
             if ($_SESSION['logged_in']['login'] == 'LOGGED' && $_SESSION['logged_in']['aktivasi'] == '0') {
-                // redirect('Login/aktivasi');
+                redirect('Login/aktivasi');
             } elseif ($_SESSION['logged_in']['login'] == 'LOGGED' && $_SESSION['logged_in']['aktivasi'] == '1') {
                 redirect(base_url('Dashboard'));
             }
@@ -81,7 +81,8 @@ class Login extends CI_Controller{
         } elseif ($_SESSION['logged_in']['aktivasi'] == '1') {
             redirect();
         } else {
-            $this->load->view('login/v_aktivasi');
+            // $this->load->view('login/v_aktivasi');
+            $this->load->view('templates_frontend/login/v_aktivasi');
         }
     }
 
@@ -92,32 +93,17 @@ class Login extends CI_Controller{
         if ($password1 == $password2) {
             $_SESSION['logged_in']['aktivasi'] = '1';
             $data = array(
-                'PASSWORD' => $password2,
-                'AKTIVASI' => '1');
-            $result = $this->Login_model->reset_password($id_user, $data);
+                'password' => $password2,
+                'aktivasi' => '1');
+            $result = $this->m_login->reset_password($id_user, $data);
             if ($result == TRUE) {
-                $this->session->set_flashdata('dashboard', '<div class="alert alert-success alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <i class="icon fas fa-check"></i> Sukses reset password
-                    </div>');
-                $data_log = array(
-                    'id_user' => $id_user,
-                    'jenis' => '4',
-                    'aksi' => 'UPDATE',
-                    'catatan' => 'sukses');
-                $this->Log_model->insert_log($data_log);
                 redirect();
             } else {
                 $this->session->set_flashdata('dashboard', '<div class="alert alert-danger alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     <i class="icon fas fa-ban"></i> Gagal reset password
                     </div>');
-                $data_log = array(
-                    'id_user' => $id_user,
-                    'jenis' => '4',
-                    'CATATAN' => 'GAGAL');
-                $this->Log_model->insert_log($data_log);
-                redirect();
+                redirect('Login/aktivasi');
             }
         } else {
             $this->session->set_flashdata('login_failed', '<div class="alert alert-danger alert-dismissible">

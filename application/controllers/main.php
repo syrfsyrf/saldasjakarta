@@ -7,6 +7,11 @@ class Main extends CI_Controller{
         $this->load->model('m_order');
         $this->load->model('m_produk');
         $this->load->model('m_user');
+        if(isset($_SESSION['logged_in']['username'])){
+            if ($_SESSION['logged_in']['aktivasi'] != '1') {
+                redirect('Login/aktivasi');
+            }
+        }
     }
 
     public function index()
@@ -48,39 +53,59 @@ class Main extends CI_Controller{
 
     public function keranjang()
     {
-        $this->load->view('templates_frontend/v_header');
-        $this->load->view('templates_frontend/keranjang/v_keranjang');
-        $this->load->view('templates_frontend/v_footer');   
+        if(!isset($_SESSION['logged_in']['username']) && $_SESSION['logged_in']['aktivasi'] != '1'){                                
+            redirect('Login');
+        } else {
+            $this->load->view('templates_frontend/v_header');
+            $this->load->view('templates_frontend/keranjang/v_keranjang');
+            $this->load->view('templates_frontend/v_footer');   
+        }
     }
 
     public function bayar()
     {
-        $data['paymentMethod'] = $this->m_order->paymentMethod();
-        $this->load->view('templates_frontend/v_header');
-        $this->load->view('templates_frontend/bayar/v_bayar', $data);
-        $this->load->view('templates_frontend/v_footer');   
+        if(!isset($_SESSION['logged_in']['username']) && $_SESSION['logged_in']['aktivasi'] != '1'){                                
+            redirect('Login');
+        } else {
+            $data['paymentMethod'] = $this->m_order->paymentMethod();
+            $this->load->view('templates_frontend/v_header');
+            $this->load->view('templates_frontend/bayar/v_bayar', $data);
+            $this->load->view('templates_frontend/v_footer');   
+        }
     }
 
     public function myOrder()
     {
-        $data['getUserOrder'] = $this->m_order->getUserOrder();
-        $this->load->view('templates_frontend/v_header');
-        $this->load->view('templates_frontend/keranjang/v_myOrder', $data);
-        $this->load->view('templates_frontend/v_footer');   
+        if(!isset($_SESSION['logged_in']['username']) && $_SESSION['logged_in']['aktivasi'] != '1'){                                
+            redirect('Login');
+        } else {
+            $data['getUserOrder'] = $this->m_order->getUserOrder();
+            $this->load->view('templates_frontend/v_header');
+            $this->load->view('templates_frontend/keranjang/v_myOrder', $data);
+            $this->load->view('templates_frontend/v_footer');   
+        }
     }
 
     public function detail($param, $id)
     {
-        $data['getPesanan'] = $this->m_order->getPesanan($id, $param);
-        $this->load->view('templates_frontend/v_header');
-        $this->load->view('templates_frontend/keranjang/v_detail', $data);
-        $this->load->view('templates_frontend/v_footer');   
+        if(!isset($_SESSION['logged_in']['username']) && $_SESSION['logged_in']['aktivasi'] != '1'){                                
+            redirect('Login');
+        } else {
+            $data['getPesanan'] = $this->m_order->getPesanan($id, $param);
+            $this->load->view('templates_frontend/v_header');
+            $this->load->view('templates_frontend/keranjang/v_detail', $data);
+            $this->load->view('templates_frontend/v_footer');   
+        }
     }
 
     public function profile($username){
-        $data['getUserProfile'] = $this->m_user->getUserProfile($username);
-        $this->load->view('templates_frontend/v_header');
-        $this->load->view('templates_frontend/profile/v_profile', $data);
-        $this->load->view('templates_frontend/v_footer');   
+        if(!isset($_SESSION['logged_in']['username']) && $_SESSION['logged_in']['aktivasi'] != '1'){                                
+            redirect('Login');
+        } else {
+            $data['getUserProfile'] = $this->m_user->getUserProfile($username);
+            $this->load->view('templates_frontend/v_header');
+            $this->load->view('templates_frontend/profile/v_profile', $data);
+            $this->load->view('templates_frontend/v_footer');   
+        }
     }
 }
