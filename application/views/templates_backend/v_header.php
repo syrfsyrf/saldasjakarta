@@ -69,7 +69,7 @@
                     <?php } else{ ?>
         <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url().$row->URL ?>">
+                <a class="nav-link" href="<?php echo base_url().$row->url ?>">
                 <i class="<?php echo $row->icon;?>"></i>
                     <span><?php echo $row->nama_menu ?></span></a>
             </li>
