@@ -5,6 +5,8 @@ class Main extends CI_Controller{
     public function __construct(){
         parent::__construct();
         $this->load->model('m_order');
+        $this->load->model('m_produk');
+        $this->load->model('m_user');
     }
 
     public function index()
@@ -22,10 +24,11 @@ class Main extends CI_Controller{
         $this->load->view('templates_frontend/v_footer');   
     }
 
-    public function detail_produk()
+    public function detail_produk($id)
     {
+        $data['GetDetailProdukFront'] = $this->m_produk->GetDetailProdukFront($id);
         $this->load->view('templates_frontend/v_header');
-        $this->load->view('templates_frontend/detail_produk/v_detail');
+        $this->load->view('templates_frontend/detail_produk/v_detail', $data);
         $this->load->view('templates_frontend/v_footer');   
     }
 
@@ -66,11 +69,18 @@ class Main extends CI_Controller{
         $this->load->view('templates_frontend/v_footer');   
     }
 
-    public function detail($id)
+    public function detail($param, $id)
     {
-        $data['getPesanan'] = $this->m_order->getPesanan($id);
+        $data['getPesanan'] = $this->m_order->getPesanan($id, $param);
         $this->load->view('templates_frontend/v_header');
         $this->load->view('templates_frontend/keranjang/v_detail', $data);
+        $this->load->view('templates_frontend/v_footer');   
+    }
+
+    public function profile($username){
+        $data['getUserProfile'] = $this->m_user->getUserProfile($username);
+        $this->load->view('templates_frontend/v_header');
+        $this->load->view('templates_frontend/profile/v_profile', $data);
         $this->load->view('templates_frontend/v_footer');   
     }
 }

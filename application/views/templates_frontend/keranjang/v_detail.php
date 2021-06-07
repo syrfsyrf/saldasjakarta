@@ -4,7 +4,7 @@
 			<div class="row justify-content-center">
 				<div class="col-xl-7 ftco-animate">
 					<h3 class="mb-4 billing-heading">Billing Details</h3>
-					<?php foreach($getPesanan->result() as $row): ?>
+					<?php foreach($getPesanan->result() as $row): $bank = $row->bank; $acc = $row->acc_number; $name = $row->acc_name; ?>
 						<div class="row align-items-end">
 							<div class="col-md-6">
 								<div class="form-group">
@@ -36,18 +36,31 @@
 									<?php } ?>
 								</div>
 							</div>
-							<?php if ($row->file == NULL) { ?>
-								<div class="col-md-12">
-									<div class="form-group">
-										<button type="submit" class="btn btn-primary form-control">Submit Receipt</button>
-									</div>
-								</div>
+							<?php if ($row->status == 'CANCELLED') { ?>
 							<?php } ?>
+							<?php if ($row->status != 'CANCELLED' && $row->file == NULL) { ?>
+									<div class="col-md-12">
+										<div class="form-group">
+											<button type="submit" class="btn btn-primary form-control">Submit Receipt</button>
+										</div>
+									</div>
+								<?php } ?>
 						</div>
 					<?php endforeach; ?>
 				</div>
 				<div class="col-xl-5">
 					<div class="row mt-5 pt-3">
+						<div class="col-md-12 d-flex mb-5">
+							<div class="cart-detail cart-total p-3 p-md-4">
+								<h3 class="billing-heading mb-4">Pembayaran</h3>
+								<p class="d-flex">
+								<span><b><?php echo $bank.' No. Rek '.$acc;?></b></span>
+								<span>Atas Nama <?php echo $name;?></span>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="row">
 						<div class="col-md-12 d-flex mb-5">
 							<div class="cart-detail cart-total p-3 p-md-4">
 								<h3 class="billing-heading mb-4">Cart Summary</h3>
@@ -74,7 +87,7 @@ if(!isset($_SESSION['logged_in']['username'])){
 } else { ?>
 	<script src="<?php echo base_url() ?>/assets/backend/js/detail_product.js"></script>
 	<script type="text/javascript">
-		getDetailPesanan('CART.SUMMARY', '<?php echo $this->uri->segment('3'); ?>');
+		getDetailPesanan('CART.SUMMARY', '<?php echo $this->uri->segment('3'); ?>', '<?php echo $this->uri->segment('4'); ?>');
           	// sumOrder('CART.SUMMARY', id);
           </script>
           <?php } ?>

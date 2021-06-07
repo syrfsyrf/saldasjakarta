@@ -16,7 +16,7 @@ function getDetailOrder(param, id){
 					for(i=0; i<data.length; i++){
 						html+= '<tr class="text-center">'+
 						'<td class="product-remove"><a href="javascript:deleteOrder('+data[i].id+');"><span class="ion-ios-close"></span></a></td>'+
-						'<td class="image-prod"><div class="img" style="background-image:url(images/product-3.jpg);"></div></td>'+
+						'<td class="image-prod"><div class="img" style="background-image:url('+base_url+data[i].path+'/'+data[i].file+');"></div></td>'+
 						'<td class="product-name">'+
 						'<h3>'+data[i].produk+'</h3>'+
 						'</td>'+

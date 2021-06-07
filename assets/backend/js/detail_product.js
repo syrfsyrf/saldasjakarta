@@ -1,8 +1,8 @@
-function getDetailPesanan(param, id){
+function getDetailPesanan(param, param2, id){
 	html = '';
 	$.ajax({
 		type    : 'ajax',
-		url     : base_url+'data/Data_order/getDetailPesanan/'+id,
+		url     : base_url+'data/Data_order/getDetailPesanan/'+param2+'/'+id,
 		async   : true,
 		dataType    : 'json',
 		success : function(data){
@@ -42,10 +42,10 @@ function getDetailPesanan(param, id){
 			}
 			if (param == 'DETAIL') {
 				$('#targetOrder').html(html);
-				sumPesanan(param, id);
+				sumPesanan(param, param2, id);
 			} else if (param == 'CART.SUMMARY') {
 				$('#cart_summary').html(html);
-				sumPesanan(param, id);
+				sumPesanan(param, param2, id);
 			} else if (param == 'SUM') {
 				$('#total_cart').html('['+total_cart+']');
 			}
@@ -53,11 +53,11 @@ function getDetailPesanan(param, id){
 	});
 }
 
-function sumPesanan(param, id){
+function sumPesanan(param, param2, id){
 	html = '';
 	$.ajax({
 		type    : 'ajax',
-		url     : base_url+'data/Data_order/sumPesanan/'+id,
+		url     : base_url+'data/Data_order/sumPesanan/'+param2+'/'+id,
 		async   : true,
 		dataType    : 'json',
 		success : function(data){

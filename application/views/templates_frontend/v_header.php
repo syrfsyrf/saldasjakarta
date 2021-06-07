@@ -53,32 +53,32 @@
 </div>
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
  <div class="container">
-   <a class="navbar-brand" href="<?php echo base_url('/main'); ?>">Toko Daging Saldas Jakarta</a>
+   <a class="navbar-brand" href="<?php echo base_url('Main'); ?>">Toko Daging Saldas Jakarta</a>
    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
      <span class="oi oi-menu"></span> Menu
    </button>
 
    <div class="collapse navbar-collapse" id="ftco-nav">
      <ul class="navbar-nav ml-auto">
-       <li class="nav-item active"><a href="<?php echo base_url('/main'); ?>" class="nav-link">Beranda</a></li>
-       <li class="nav-item active"><a href="<?php echo base_url('/main/kategori_produk'); ?>" class="nav-link">Kategori Produk</a></li>
-       <li class="nav-item"><a href="<?php echo base_url('/main/tentang_kami'); ?>" class="nav-link">Tentang Kami</a></li>
-       <li class="nav-item"><a href="<?php echo base_url('/main/kontak_kami'); ?>" class="nav-link">Kontak Kami</a></li>
+       <li class="nav-item active"><a href="<?php echo base_url('Main'); ?>" class="nav-link">Beranda</a></li>
+       <li class="nav-item active"><a href="<?php echo base_url('Main/kategori_produk'); ?>" class="nav-link">Kategori Produk</a></li>
+       <li class="nav-item"><a href="<?php echo base_url('Main/tentang_kami'); ?>" class="nav-link">Tentang Kami</a></li>
+       <li class="nav-item"><a href="<?php echo base_url('Main/kontak_kami'); ?>" class="nav-link">Kontak Kami</a></li>
        <li class="nav-item dropdown cta cta-colored">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icon-shopping_cart" id="total_cart"></span></a>
         <div class="dropdown-menu" aria-labelledby="dropdown04">
-          <a class="dropdown-item" href="<?php echo base_url('/main/keranjang'); ?>">Cart</a>
-          <a class="dropdown-item" href="<?php echo base_url('/main/myOrder'); ?>">My Order</a>
+          <a class="dropdown-item" href="<?php echo base_url('Main/keranjang'); ?>">Cart</a>
+          <a class="dropdown-item" href="<?php echo base_url('Main/myOrder'); ?>">My Order</a>
         </div>
      </li>
      <?php if(!isset($_SESSION['logged_in']['username'])){ ?>
-      <li class="nav-item"><a href="<?php echo base_url('/login'); ?>" class="nav-link">Login</a></li>
+      <li class="nav-item"><a href="<?php echo base_url('Login'); ?>" class="nav-link">Login</a></li>
       <?php } else { ?>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['logged_in']['username']; ?></a>
           <div class="dropdown-menu" aria-labelledby="dropdown04">
-            <a class="dropdown-item" href="checkout.html">Profile</a>
-            <a class="dropdown-item" href="<?php echo base_url('/login/logout'); ?>">Logout</a>
+            <a class="dropdown-item" href="<?php echo base_url('Main/profile/').$_SESSION['logged_in']['username']; ?>">Profile</a>
+            <a class="dropdown-item" href="<?php echo base_url('Login/logout'); ?>">Logout</a>
           </div>
         </li>
       <?php } ?>

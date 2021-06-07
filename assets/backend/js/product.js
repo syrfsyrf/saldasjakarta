@@ -84,7 +84,7 @@ function getOrder(id, param){
                             '</div>'+
                             '<div class="bottom-area d-flex px-3">'+
                                 '<div class="m-auto d-flex">'+
-                                    '<a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">'+
+                                    '<a href="'+base_url+'main/detail_produk/'+data[i].id_produk+'" class="add-to-cart d-flex justify-content-center align-items-center text-center">'+
                                         '<span><i class="ion-ios-menu"></i></span>'+
                                     '</a>'+
                                     '<a href="javascript:addOrder('+data[i].id_stock+');" class="buy-now d-flex justify-content-center align-items-center mx-1">'+
@@ -289,16 +289,17 @@ function getDataUser(id){
 }
 
 function checkOut(){
+    var id_pesanan = document.getElementById("id_pesanan").value;
     $.ajax({
         type    : "POST",
         url     : base_url+'data/Data_order/checkOut/ORDER',
         async   : true,
         dataType    : 'json',
-        data : {nama:document.getElementById("nama").value,email:document.getElementById("email").value,telp:document.getElementById("telp").value,jalan:document.getElementById("jalan").value,rt:document.getElementById("rt").value,rw:document.getElementById("rw").value,kecamatan:document.getElementById("kecamatan").value,kelurahan:document.getElementById("kelurahan").value,kota:document.getElementById("kota").value,provinsi:document.getElementById("provinsi").value,kd_pos:document.getElementById("kd_pos").value,desa:document.getElementById("desa").value,id_pesanan:document.getElementById("id_pesanan").value,paymentMethod:document.getElementById("paymentMethod").value},
+        data : {nama:document.getElementById("nama").value,email:document.getElementById("email").value,telp:document.getElementById("telp").value,jalan:document.getElementById("jalan").value,rt:document.getElementById("rt").value,rw:document.getElementById("rw").value,kecamatan:document.getElementById("kecamatan").value,kelurahan:document.getElementById("kelurahan").value,kota:document.getElementById("kota").value,provinsi:document.getElementById("provinsi").value,kd_pos:document.getElementById("kd_pos").value,desa:document.getElementById("desa").value,id_pesanan:id_pesanan,paymentMethod:document.getElementById("paymentMethod").value},
         success : function(data){
             if (data == true) {
                 alert("Sukses Buat Order");
-                // location.reload();
+                window.location.replace(base_url+'Main/detail/IDpesanan/'+id_pesanan);
             } else {
                 for(i=0; i<data.length; i++){
                     alert('Stock '+data[i].nama+' tidak tersedia');
@@ -321,7 +322,7 @@ function doCancel(id){
             dataType    : 'json',
             data : {id_pesanan:id},
             success : function(data){
-                // location.reload();
+                location.reload();
             }
         });
     }

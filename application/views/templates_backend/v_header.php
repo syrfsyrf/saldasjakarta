@@ -45,20 +45,20 @@
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
-            <?php foreach($menuparent->result() as $row): $parent=$row->ID;
-                if($row->IS_PARENT=='Y'){ 
-                    if($row->CHILD=='Y'){ ?>
+            <?php foreach($menuparent->result() as $row): $parent=$row->id;
+                if($row->is_parent=='Y'){ 
+                    if($row->child=='Y'){ ?>
                     <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu<?php echo $row->ID ?>"
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu<?php echo $row->id ?>"
                             aria-expanded="true" aria-controls="collapseTwo">
-                            <i class="<?php echo $row->ICON;?>"></i>
-                            <span><?php echo $row->NAMA_MENU ?></span>
+                            <i class="<?php echo $row->icon;?>"></i>
+                            <span><?php echo $row->nama_menu ?></span>
                         </a>
-                        <div id="menu<?php echo $row->ID ?>" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div id="menu<?php echo $row->id ?>" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                             <div class="bg-white py-2 collapse-inner rounded">
                             <?php foreach($menuchild->result() as $row):
-                                    if($row->PARENT2==$parent){ ?>
-                                    <a class="collapse-item" href="<?php echo base_url().$row->URL2 ?>"><?php echo $row->NAMA_MENU2 ?></a>
+                                    if($row->parent2==$parent){ ?>
+                                    <a class="collapse-item" href="<?php echo base_url().$row->url2 ?>"><?php echo $row->nama_menu2 ?></a>
                                     <?php }  ?>
                                 
                                 
@@ -70,8 +70,8 @@
         <!-- Nav Item - Dashboard -->
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo base_url().$row->URL ?>">
-                <i class="<?php echo $row->ICON;?>"></i>
-                    <span><?php echo $row->NAMA_MENU ?></span></a>
+                <i class="<?php echo $row->icon;?>"></i>
+                    <span><?php echo $row->nama_menu ?></span></a>
             </li>
                     <?php } } ?>
             

@@ -29,7 +29,7 @@ class m_order extends CI_Model {
 			CASE
 			WHEN b.tgl_expired < SYSDATE() THEN 'EXPIRED'
 			ELSE 'AVAILABLE'
-			END AS expire
+			END AS expire, a.id as 'id_produk'
 			FROM mst_produk a JOIN stock b ON a.id = b.id_produk WHERE ".$condition." b.status = '1' GROUP BY b.id_produk ORDER BY b.insert_date DESC) O WHERE expire != 'EXPIRED'");
 		return $hasil->result();
 	}
@@ -45,7 +45,7 @@ class m_order extends CI_Model {
 	}
 
 	public function getDetailOrder($id) {
-		$hasil = $this->db->query("SELECT a.id as 'id', a.id_pesanan as 'id_pesanan', a.id_produk, FORMAT(a.harga_stock, 'c') as 'harga_stock', a.kuantitas, FORMAT((a.harga_stock * a.kuantitas), 'c') as 'total_produk', b.nama as 'produk' FROM pesanan_detail a JOIN mst_produk b ON a.id_produk = b.id JOIN stock c ON a.id_stock = c.id WHERE a.id_pesanan = '".$id."'");
+		$hasil = $this->db->query("SELECT a.id as 'id', a.id_pesanan as 'id_pesanan', a.id_produk, FORMAT(a.harga_stock, 'c') as 'harga_stock', a.kuantitas, FORMAT((a.harga_stock * a.kuantitas), 'c') as 'total_produk', b.file, b.path, b.nama as 'produk' FROM pesanan_detail a JOIN mst_produk b ON a.id_produk = b.id JOIN stock c ON a.id_stock = c.id WHERE a.id_pesanan = '".$id."'");
 		return $hasil->result();
 	}
 
@@ -158,7 +158,7 @@ class m_order extends CI_Model {
 				UPDATE stock SET used_stok = used_stok + (SELECT kuantitas FROM pesanan_detail WHERE id = '".$row->id."') WHERE id = (SELECT id_stock FROM pesanan_detail WHERE id = '".$row->id."')");
 		endforeach;
 		$this->db->query("
-			UPDATE pesanan SET total = (SELECT SUM((harga_stock * kuantitas)) as 'total_order_nof' FROM pesanan_detail WHERE id_pesanan = '".$id_pesanan."'), status = '1', is_approved = 1, tgl_pembayaran = SYSDATE() WHERE id = '".$id_pesanan."'");
+			UPDATE pesanan SET total = (SELECT SUM((harga_stock * kuantitas)) as 'total_order_nof' FROM pesanan_detail WHERE id_pesanan = '".$id_pesanan."'), status = '1', is_approved = 1, tgl_pembayaran = SYSDATE(), transaction_id = CASE WHEN metode_pembayaran = '1' THEN CONCAT('OF-".date("y").date("m").date("d")."', id) ELSE CONCAT('ON-".date("y").date("m").date("d")."', id) END WHERE id = '".$id_pesanan."'");
 		$this->db->trans_complete(); 
 
 		if ($this->db->trans_status() === FALSE) {
@@ -204,21 +204,33 @@ class m_order extends CI_Model {
 		return $hasil;
 	}
 
-	public function getDetailPesanan($id){
-		$hasil = $this->db->query("SELECT a.id as 'id', a.id_pesanan as 'id_pesanan', a.id_produk, FORMAT(a.harga_stock, 'c') as 'harga_stock', a.kuantitas, FORMAT((a.harga_stock * a.kuantitas), 'c') as 'total_produk', b.nama as 'produk' FROM pesanan_detail a JOIN mst_produk b ON a.id_produk = b.id JOIN stock c ON a.id_stock = c.id WHERE a.id_pesanan = (SELECT id FROM pesanan WHERE transaction_id = '".$id."')");
+	public function getDetailPesanan($param, $id){
+		if ($param == 'IDpesanan') {
+			$condition = $id;
+		} elseif ($param == 'transactionID') {
+			$condition = "(SELECT id FROM pesanan WHERE transaction_id = '".$id."')";
+		}
+		$hasil = $this->db->query("SELECT a.id as 'id', a.id_pesanan as 'id_pesanan', a.id_produk, FORMAT(a.harga_stock, 'c') as 'harga_stock', a.kuantitas, FORMAT((a.harga_stock * a.kuantitas), 'c') as 'total_produk', b.nama as 'produk' FROM pesanan_detail a JOIN mst_produk b ON a.id_produk = b.id JOIN stock c ON a.id_stock = c.id WHERE a.id_pesanan = ".$condition);
 		return $hasil->result();	
 	}
 
-	public function sumPesanan($id) {
-		$hasil = $this->db->query("SELECT CASE WHEN FORMAT(SUM((harga_stock * kuantitas)), 'c') IS NULL THEN 0 ELSE FORMAT(SUM((harga_stock * kuantitas)), 'c') END AS 'total_order', SUM((harga_stock * kuantitas)) as 'total_order_nof' FROM pesanan_detail WHERE id_pesanan = (SELECT id FROM pesanan WHERE transaction_id = '".$id."')");
+	public function sumPesanan($param, $id) {
+		if ($param == 'IDpesanan') {
+			$condition = $id;
+		} elseif ($param == 'transactionID') {
+			$condition = "(SELECT id FROM pesanan WHERE transaction_id = '".$id."')";
+		}
+		$hasil = $this->db->query("SELECT CASE WHEN FORMAT(SUM((harga_stock * kuantitas)), 'c') IS NULL THEN 0 ELSE FORMAT(SUM((harga_stock * kuantitas)), 'c') END AS 'total_order', SUM((harga_stock * kuantitas)) as 'total_order_nof' FROM pesanan_detail WHERE id_pesanan = ".$condition);
 		return $hasil->result();
 	}
 
 	public function getPesanan($id, $param = FALSE){
 		if ($param == 'BACKEND') {
-			$hasil = $this->db->query("SELECT a.id AS 'id_pesanan', a.transaction_id, (SELECT jenis FROM mst_metode_pembayaran WHERE id = a.metode_pembayaran) AS 'metode_pembayaran', a.total, (SELECT detail FROM tb_status_pesanan WHERE id = a.status) AS 'status', a.status AS 'dstatus', DATE_FORMAT(a.tgl_pembayaran, '%d %M %Y') as 'tgl_pembayaran', DATE_FORMAT(a.tgl_pembayaran, '%Y-%d-%m') as 'dtgl_pembayaran', b.file, b.directory FROM pesanan a LEFT JOIN order_job b ON a.id = b.id_pesanan WHERE a.id = '".$id."'");
-		} else {
-			$hasil = $this->db->query("SELECT a.id AS 'id_pesanan', a.transaction_id, (SELECT jenis FROM mst_metode_pembayaran WHERE id = a.metode_pembayaran) AS 'metode_pembayaran', a.total, (SELECT detail FROM tb_status_pesanan WHERE id = a.status) AS 'status', a.status AS 'dstatus', DATE_FORMAT(a.tgl_pembayaran, '%d %M %Y') as 'tgl_pembayaran', DATE_FORMAT(a.tgl_pembayaran, '%Y-%d-%m') as 'dtgl_pembayaran', b.file, b.directory FROM pesanan a LEFT JOIN order_job b ON a.id = b.id_pesanan WHERE a.transaction_id = '".$id."'");
+			$hasil = $this->db->query("SELECT a.id AS 'id_pesanan', a.transaction_id, c.jenis AS 'metode_pembayaran', c.acc_number, c.acc_name, c.bank, a.total, (SELECT detail FROM tb_status_pesanan WHERE id = a.status) AS 'status', a.status AS 'dstatus', DATE_FORMAT(a.tgl_pembayaran, '%d %M %Y') as 'tgl_pembayaran', DATE_FORMAT(a.tgl_pembayaran, '%Y-%d-%m') as 'dtgl_pembayaran', b.file, b.directory FROM pesanan a JOIN mst_metode_pembayaran c ON a.metode_pembayaran = c.id LEFT JOIN order_job b ON a.id = b.id_pesanan WHERE a.id = '".$id."'");
+		} else if($param == 'transactionID') {
+			$hasil = $this->db->query("SELECT a.id AS 'id_pesanan', a.transaction_id, c.jenis AS 'metode_pembayaran', c.acc_number, c.acc_name, c.bank, a.total, (SELECT detail FROM tb_status_pesanan WHERE id = a.status) AS 'status', a.status AS 'dstatus', DATE_FORMAT(a.tgl_pembayaran, '%d %M %Y') as 'tgl_pembayaran', DATE_FORMAT(a.tgl_pembayaran, '%Y-%d-%m') as 'dtgl_pembayaran', b.file, b.directory FROM pesanan a JOIN mst_metode_pembayaran c ON a.metode_pembayaran = c.id LEFT JOIN order_job b ON a.id = b.id_pesanan WHERE a.transaction_id = '".$id."'");
+		} else if ($param == 'IDpesanan') {
+			$hasil = $this->db->query("SELECT a.id AS 'id_pesanan', a.transaction_id, c.jenis AS 'metode_pembayaran', c.acc_number, c.acc_name, c.bank, a.total, (SELECT detail FROM tb_status_pesanan WHERE id = a.status) AS 'status', a.status AS 'dstatus', DATE_FORMAT(a.tgl_pembayaran, '%d %M %Y') as 'tgl_pembayaran', DATE_FORMAT(a.tgl_pembayaran, '%Y-%d-%m') as 'dtgl_pembayaran', b.file, b.directory FROM pesanan a JOIN mst_metode_pembayaran c ON a.metode_pembayaran = c.id LEFT JOIN order_job b ON a.id = b.id_pesanan WHERE a.id = '".$id."'");
 		}
 		return $hasil;
 	}

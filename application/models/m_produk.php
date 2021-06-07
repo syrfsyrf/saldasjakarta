@@ -131,4 +131,9 @@ class m_produk extends CI_Model {
 			return FALSE;
 		}
 	}
+
+	public function GetDetailProdukFront($value){
+		$hasil = $this->db->query("SELECT a.id as 'id_produk', a.nama as 'nama_produk', b.jenis as 'kategori', c.id as 'id_stock', a.deskripsi, (SELECT nama FROM mst_user WHERE id = a.created_by) as 'created_by', a.insert_date as 'insert_date', a.file, a.path, c.jumlah_stok as 'jumlah_stok', c.harga as 'harga', FORMAT(c.harga, 'c') as 'dharga', c.jenis_harga_detail as 'jenis_harga_detail', c.jenis_harga as 'jenis_harga', c.tgl_expired as 'tgl_expired', c.status as 'status', (SELECT jenis FROM mst_jenis_harga WHERE id = jenis_harga) as 'djenis_harga', (c.jumlah_stok - c.used_stok) AS 'sisa_stok' FROM mst_produk a JOIN mst_kategori b ON a.id_kategori = b.id JOIN stock c ON a.id = c.id_produk WHERE c.status = '1' AND a.id = '".$value."'");
+		return $hasil;		
+	}
 }

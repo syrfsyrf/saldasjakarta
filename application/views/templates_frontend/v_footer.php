@@ -60,22 +60,22 @@
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 
-  <script src="<?php echo base_url() ?>/assets/frontend/js/jquery.min.js"></script>
-  <script src="<?php echo base_url() ?>/assets/frontend/js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="<?php echo base_url() ?>/assets/frontend/js/popper.min.js"></script>
-  <script src="<?php echo base_url() ?>/assets/frontend/js/bootstrap.min.js"></script>
-  <script src="<?php echo base_url() ?>/assets/frontend/js/jquery.easing.1.3.js"></script>
-  <script src="<?php echo base_url() ?>/assets/frontend/js/jquery.waypoints.min.js"></script>
-  <script src="<?php echo base_url() ?>/assets/frontend/js/jquery.stellar.min.js"></script>
-  <script src="<?php echo base_url() ?>/assets/frontend/js/owl.carousel.min.js"></script>
-  <script src="<?php echo base_url() ?>/assets/frontend/js/jquery.magnific-popup.min.js"></script>
-  <script src="<?php echo base_url() ?>/assets/frontend/js/aos.js"></script>
-  <script src="<?php echo base_url() ?>/assets/frontend/js/jquery.animateNumber.min.js"></script>
-  <script src="<?php echo base_url() ?>/assets/frontend/js/bootstrap-datepicker.js"></script>
-  <script src="<?php echo base_url() ?>/assets/frontend/js/scrollax.min.js"></script>
+  <script src="<?php echo base_url() ?>assets/frontend/js/jquery.min.js"></script>
+  <script src="<?php echo base_url() ?>assets/frontend/js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="<?php echo base_url() ?>assets/frontend/js/popper.min.js"></script>
+  <script src="<?php echo base_url() ?>assets/frontend/js/bootstrap.min.js"></script>
+  <script src="<?php echo base_url() ?>assets/frontend/js/jquery.easing.1.3.js"></script>
+  <script src="<?php echo base_url() ?>assets/frontend/js/jquery.waypoints.min.js"></script>
+  <script src="<?php echo base_url() ?>assets/frontend/js/jquery.stellar.min.js"></script>
+  <script src="<?php echo base_url() ?>assets/frontend/js/owl.carousel.min.js"></script>
+  <script src="<?php echo base_url() ?>assets/frontend/js/jquery.magnific-popup.min.js"></script>
+  <script src="<?php echo base_url() ?>assets/frontend/js/aos.js"></script>
+  <script src="<?php echo base_url() ?>assets/frontend/js/jquery.animateNumber.min.js"></script>
+  <script src="<?php echo base_url() ?>assets/frontend/js/bootstrap-datepicker.js"></script>
+  <script src="<?php echo base_url() ?>assets/frontend/js/scrollax.min.js"></script>
   <script src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15861.759201862938!2d106.8299132398065!3d-6.337035211851748!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69edcd85173fd1%3A0x97405f1872d88f91!2sLili%20Tailor!5e0!3m2!1sen!2sid!4v1617730556672!5m2!1sen!2sid"></script>
-  <script src="<?php echo base_url() ?>/assets/frontend/js/google-map.js"></script>
-  <script src="<?php echo base_url() ?>/assets/frontend/js/main.js"></script>
+  <script src="<?php echo base_url() ?>assets/frontend/js/google-map.js"></script>
+  <script src="<?php echo base_url() ?>assets/frontend/js/main.js"></script>
     
   </body>
 </html>

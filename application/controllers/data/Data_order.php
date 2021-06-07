@@ -41,8 +41,8 @@ class Data_order extends CI_Controller{
         echo json_encode($hasil);
     }
 
-    public function getDetailPesanan($id){
-        $hasil = $this->m_order->getDetailPesanan($id);
+    public function getDetailPesanan($param, $id){
+        $hasil = $this->m_order->getDetailPesanan($param, $id);
         echo json_encode($hasil);
     }
 
@@ -89,8 +89,8 @@ class Data_order extends CI_Controller{
         echo json_encode($hasil);
     }
 
-    public function sumPesanan($id){
-        $hasil = $this->m_order->sumPesanan($id);
+    public function sumPesanan($param, $id){
+        $hasil = $this->m_order->sumPesanan($param, $id);
         echo json_encode($hasil);
     }
 

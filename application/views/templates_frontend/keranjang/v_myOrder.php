@@ -34,7 +34,9 @@
 									<td><a class="btn btn-primary nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
 										<div class="dropdown-menu" aria-labelledby="dropdown04">
 											<a class="dropdown-item" href="javascript:doCancel(<?php echo $row->id; ?>);">Cancel</a>
-											<a class="dropdown-item" href="<?php echo base_url('/main/detail/'.$row->transaction_id); ?>">Detail</a>
+											<?php if ($row->transaction_id != NULL) { ?>
+												<a class="dropdown-item" href="<?php echo base_url('/main/detail/transactionID/'.$row->transaction_id); ?>">Detail</a>
+											<?php } ?>
 										</div></td>
 								</tr>
 							<?php endforeach; ?>
