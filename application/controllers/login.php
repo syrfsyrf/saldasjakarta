@@ -57,7 +57,7 @@ class Login extends CI_Controller{
                    'catatan' => 'sukses');
                 $this->m_log->insert_log($data_log);
                 if ($row1['aktivasi'] == '1') {
-                    if ($_SESSION['logged_in']['id_user'] == '5') {
+                    if ($_SESSION['logged_in']['role'] == '5') {
                         redirect();
                     } else {
                         redirect('Dashboard');
@@ -97,7 +97,12 @@ class Login extends CI_Controller{
                 'aktivasi' => '1');
             $result = $this->m_login->reset_password($id_user, $data);
             if ($result == TRUE) {
-                redirect();
+                // redirect();
+                if ($_SESSION['logged_in']['role'] == '5') {
+                        redirect();
+                    } else {
+                        redirect('Dashboard');
+                    }
             } else {
                 $this->session->set_flashdata('dashboard', '<div class="alert alert-danger alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

@@ -8,6 +8,7 @@ class Dashboard extends CI_Controller{
         $this->load->model('m_order');
         $this->load->model('m_pembayaran');
         $this->load->model('m_count');
+        $this->load->model('m_log');
 
         if(!isset($_SESSION['logged_in']['username']) && $_SESSION['logged_in']['aktivasi'] != '1'){                                
             redirect('Login');
@@ -25,7 +26,8 @@ class Dashboard extends CI_Controller{
         $this->load->view('templates_backend/v_header', $array);
         switch ($_SESSION['logged_in']['role']) {
             case "1":
-            $this->load->view('templates_backend/dashboard/v_super_user');
+            $data['getLogSummary'] = $this->m_log->getLogSummary();
+            $this->load->view('templates_backend/dashboard/v_super_user', $data);
             break;
 
             case "2":

@@ -1,4 +1,5 @@
-base_url = 'http://localhost/saldasjakarta/';
+// base_url = 'http://localhost/saldasjakarta/';
+base_url = 'http://47.254.249.69/saldasjakarta/';
 
 var id_pesanan = 'NULL';
 var id_user;
@@ -99,6 +100,14 @@ function getOrder(id, param){
                             html2 = data[i].nama;
                         }
                     }
+                    html2 += '<span><div class="toast mt-3">'+
+                            '<div class="toast-header">'+
+                              'Add To Cart'+
+                            '</div>'+
+                            '<div class="toast-body">'+
+                              'Success'+
+                            '</div>'+
+                        '</div></span>';
                 }
                 $('#target_product').html(html2);
                 html2 = '';
@@ -123,6 +132,7 @@ function addOrder(id_stock){
             success : function(data){
                 if (data == true) {
                     // console.log('im TRUE');
+                    $('.toast').toast('show');
                     getDetailOrder('SUM', id_pesanan);
                 } else {
                     console.log('im FALSE');
