@@ -1,5 +1,6 @@
 // base_url = 'http://localhost/saldasjakarta/';
-base_url = 'http://47.254.249.69/saldasjakarta/';
+var base_url = window.location.origin;
+// base_url = 'http://47.254.249.69/saldasjakarta/';
 
 function getAuditData(){
     var dateStart = document.getElementById("dateStart").value;
