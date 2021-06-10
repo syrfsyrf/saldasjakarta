@@ -44,6 +44,7 @@ function getKategori(){
 
 function getOrder(id, param){
     html2 = '';
+    var name_kat;
     $.ajax({
         type    : 'ajax',
         url     : base_url+'data/Data_order/getOrder/'+id+'/'+param,
@@ -51,6 +52,16 @@ function getOrder(id, param){
         dataType    : 'json',
         success : function(data){
                 if (!$.trim(data)){
+                    $.ajax({
+                        type    : 'ajax',
+                        url     : base_url+'data/Data_order/getOrderNotFound/'+id,
+                        async   : true,
+                        dataType    : 'json',
+                        success : function(data){
+                            name_kat = data[0].jenis;
+                            document.getElementById("name_kat").innerHTML = name_kat;
+                        }
+                    });
                     html2 += '<div class="col-md-6 col-lg-3">'+
                     '<div class="product">'+
                         '<a href="#" class="img-prod"><img class="img-fluid" src="'+base_url+'assets/frontend/images/product-1.jpg" alt="Colorlib Template">'+
@@ -71,32 +82,33 @@ function getOrder(id, param){
                     var i;
                     for(i=0; i<data.length; i++){
                         if (data[i].id == null) {
-                            // alert('ada'+data[i].kategori);
-                            html2 += '<div class="col-md-6 col-lg-3">'+
-                    '<div class="product">'+
-                        '<a href="#" class="img-prod"><img class="img-fluid" src="'+base_url+data[i].path+'/'+data[i].file+'" alt="Colorlib Template">'+
-                            '<div class="overlay"></div>'+
-                        '</a>'+
-                        '<div class="text py-3 pb-4 px-3 text-center">'+
-                            '<h3><a href="#">'+data[i].nama+'</a></h3>'+
-                            '<div class="d-flex">'+
-                                '<div class="pricing">'+
-                                    '<p class="price"><span>Rp '+data[i].harga+' /'+data[i].jenis_harga_detail+'</span></p>'+
-                                '</div>'+
-                            '</div>'+
-                            '<div class="bottom-area d-flex px-3">'+
-                                '<div class="m-auto d-flex">'+
-                                    '<a href="'+base_url+'main/detail_produk/'+data[i].id_produk+'" class="add-to-cart d-flex justify-content-center align-items-center text-center">'+
-                                        '<span><i class="ion-ios-menu"></i></span>'+
+                            name_kat = data[i].kategori;
+                            html2 += 
+                            '<div class="col-md-6 col-lg-3">'+
+                                '<div class="product">'+
+                                    '<a href="#" class="img-prod"><img class="img-fluid" src="'+base_url+data[i].path+'/'+data[i].file+'" alt="Colorlib Template">'+
+                                        '<div class="overlay"></div>'+
                                     '</a>'+
-                                    '<a href="javascript:addOrder('+data[i].id_stock+');" class="buy-now d-flex justify-content-center align-items-center mx-1">'+
-                                        '<span><i class="ion-ios-cart"></i></span>'+
-                                    '</a>'+
+                                    '<div class="text py-3 pb-4 px-3 text-center">'+
+                                        '<h3><a href="#">'+data[i].nama+'</a></h3>'+
+                                        '<div class="d-flex">'+
+                                            '<div class="pricing">'+
+                                                '<p class="price"><span>Rp '+data[i].harga+' /'+data[i].jenis_harga_detail+'</span></p>'+
+                                            '</div>'+
+                                        '</div>'+
+                                        '<div class="bottom-area d-flex px-3">'+
+                                            '<div class="m-auto d-flex">'+
+                                                '<a href="'+base_url+'main/detail_produk/'+data[i].id_produk+'" class="add-to-cart d-flex justify-content-center align-items-center text-center">'+
+                                                    '<span><i class="ion-ios-menu"></i></span>'+
+                                                '</a>'+
+                                                '<a href="javascript:addOrder('+data[i].id_stock+');" class="buy-now d-flex justify-content-center align-items-center mx-1">'+
+                                                    '<span><i class="ion-ios-cart"></i></span>'+
+                                                '</a>'+
+                                            '</div>'+
+                                        '</div>'+
+                                    '</div>'+
                                 '</div>'+
-                            '</div>'+
-                        '</div>'+
-                    '</div>'+
-                '</div>';
+                            '</div>';
                         } else {
                             html2 = data[i].nama;
                         }
@@ -109,6 +121,7 @@ function getOrder(id, param){
                               'Success'+
                             '</div>'+
                         '</div></span>';
+                document.getElementById("name_kat").innerHTML = name_kat;
                 }
                 $('#target_product').html(html2);
                 html2 = '';
