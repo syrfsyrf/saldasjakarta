@@ -130,10 +130,10 @@
                                                 <i class="fas fa-ellipsis-v fa-sm fa-fw "></i></a>
                                                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                                                     <?php if ($row->harga == NULL && $row->tgl_expired == NULL && $row->jumlah_stok == NULL) { ?>
-                                                        <a class="dropdown-item" href="<?php echo base_url('produk/tambah_stok/'.$row->id_produk);?>">Tambah Stok</a>
+                                                        <a class="dropdown-item" href="<?php echo base_url('Produk/tambah_stok/'.$row->id_produk);?>">Tambah Stok</a>
                                                     <?php } else { ?>
-                                                        <a class="dropdown-item" href="<?php echo base_url('produk/edit/'.$row->id_produk);?>">Edit</a>
-                                                        <a class="dropdown-item" href="<?php echo base_url('produk/tambah_stok/'.$row->id_produk);?>">Tambah Stok Baru</a>
+                                                        <a class="dropdown-item" href="<?php echo base_url('Produk/edit/'.$row->id_produk);?>">Edit</a>
+                                                        <a class="dropdown-item" href="<?php echo base_url('Produk/tambah_stok/'.$row->id_produk);?>">Tambah Stok Baru</a>
                                                     <?php } ?>
                                                 </div>
                                             </div>

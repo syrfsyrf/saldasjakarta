@@ -58,7 +58,7 @@ class Produk extends CI_Controller{
     {
         $array['menuparent'] = $this->m_menu->GetMenuParent();
         $array['menuchild'] = $this->m_menu->GetMenuChild();
-        $data['getproduk'] = $this->m_produk->GetDetailProduk('edit', $value);
+        $data['getproduk'] = $this->m_produk->GetDetailProduk('stock_detail', $value);
         $data['getJenisHarga'] = $this->m_produk->GetJenisHarga();
         $this->load->view('templates_backend/v_header', $array);
         $this->load->view('templates_backend/produk/v_tambah_stok', $data);
