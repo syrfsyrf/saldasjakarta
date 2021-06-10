@@ -22,6 +22,11 @@ class Data_order extends CI_Controller{
         echo json_encode($hasil);
     }
 
+    public function getOrderNotFound($id){
+        $hasil = $this->m_order->getOrderNotFound($id);
+        echo json_encode($hasil);
+    }
+
     public function getUserAvailablity($id){
         $hasil = $this->m_order->getUserAvailablity($id);
         echo json_encode($hasil);

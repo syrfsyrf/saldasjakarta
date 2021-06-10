@@ -34,6 +34,11 @@ class m_order extends CI_Model {
 		return $hasil->result();
 	}
 
+	public function getOrderNotFound($id) {
+		$hasil = $this->db->query("SELECT jenis FROM mst_kategori WHERE id = '".$id."'");
+		return $hasil->result();
+	}
+
 	public function getUserLastOrder($id) {
 		$hasil = $this->db->query("SELECT id as 'id_pesanan', total as 'total' FROM pesanan WHERE id_user = '".$id."' and status = '0' ORDER BY insert_date desc LIMIT 1");
 		return $hasil->result();
