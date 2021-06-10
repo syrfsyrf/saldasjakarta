@@ -21,7 +21,7 @@
 					<div class="col-sm-12 ftco-animate text-center">
 						<h1 class="mb-2">100% Daging &amp; Halal</h1>
 						<h2 class="subheading mb-4">Kita Mengirimkan Daging Berkualitas dan &amp; Halal</h2>
-						<p><a href="<?php echo base_url('/main'); ?>" class="btn btn-primary">Lihat Detail</a></p>
+						<p><a href="<?php echo base_url('Main/kategori_produk'); ?>" class="btn btn-primary">Lihat Detail</a></p>
 					</div>
 
 				</div>
@@ -87,27 +87,27 @@
 			<div class="col-md-8">
 				<div class="row">
 					<div class="col-md-6 order-md-last align-items-stretch d-flex">
-						<div class="category-wrap-2 ftco-animate img align-self-stretch d-flex" style="background-image: url(assets/frontend/images/homemade.png);">
+						<div class="category-wrap-2 ftco-animate img align-self-stretch d-flex" style="background-image: url('<?php echo base_url(); ?>assets/frontend/images/homemade.png');">
 							<div class="text text-center">
 								<h2>Produk Home Made Kami</h2>
 								<p>Memenuhi Kebutuhan Harian dan Bisnis Anda</p>
-								<p><a href="<?php echo base_url('/main/kategori_produk/v_homemade'); ?>" class="btn btn-primary">Produk HomeMade Kami</a></p><h2 class="mb-0">
+								<p><a href="<?php echo base_url('Main/kategori_produk'); ?>" class="btn btn-primary">Produk HomeMade Kami</a></p><h2 class="mb-0">
 								</div>
 							</div>
 						</div>
 
 
 						<div class="col-md-6">
-							<div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url(assets/frontend/images/cow.jpg);">
+							<div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url('<?php echo base_url(); ?>assets/frontend/images/cow.jpg');">
 								<div class="text px-3 py-1">
-									<h2 class="mb-0"><a href="<?php echo base_url('/main/kategori_produk/v_dagingsapi'); ?>">Daging Sapi</a></h2>
+									<h2 class="mb-0"><a href="<?php echo base_url('Main/kategori_produk'); ?>">Daging Sapi</a></h2>
 								</div>
 
 
 							</div>
-							<div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url(assets/frontend/images/chicken.jpg);">
+							<div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url('<?php echo base_url(); ?>assets/frontend/images/chicken.jpg');">
 								<div class="text px-3 py-1">
-									<h2 class="mb-0"><a href="<?php echo base_url('/main/kategori_produk/v_dagingayam'); ?>">Daging Ayam</a></h2>
+									<h2 class="mb-0"><a href="<?php echo base_url('Main/kategori_produk'); ?>">Daging Ayam</a></h2>
 								</div>
 							</div>
 						</div>
@@ -115,19 +115,16 @@
 				</div>
 
 				<div class="col-md-4">
-					<div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url(assets/frontend/images/fish.jpg);">
+					<div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url('<?php echo base_url(); ?>assets/frontend/images/fish.jpg');">
 						<div class="text px-3 py-1">
-							<h2 class="mb-0"><a href="<?php echo base_url('/main/kategori_produk/v_dagingikan'); ?>">Daging Ikan</a></h2>
+							<h2 class="mb-0"><a href="<?php echo base_url('Main/kategori_produk'); ?>">Daging Ikan</a></h2>
 						</div>		
 					</div>
-					<div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url(assets/frontend/images/frozenfood.jpg);">
+					<div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url('<?php echo base_url(); ?>assets/frontend/images/frozenfood.jpg');">
 						<div class="text px-3 py-1">
-							<h2 class="mb-0"><a href="<?php echo base_url('/main/kategori_produk/v_frozenfood'); ?>"><a href="#">Frozen Food</a></h2>
-						</div>
+							<h2 class="mb-0"><a href="<?php echo base_url('Main/kategori_produk'); ?>">Frozen Food</a></h2>
+						</div>		
 					</div>
-					
-					
-
 				</div>
 			</div>
 		</div>

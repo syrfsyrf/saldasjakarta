@@ -46,35 +46,11 @@
     </div>
   </div>
 </div>
-<div class="row block-9">
-  <div class="col-md-6 order-md-last d-flex">
-    <form action="#" class="bg-white p-5 contact-form">
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Nama Anda">
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Email Anda">
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Deskripsi Subjek">
-      </div>
-      <div class="form-group">
-        <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Pesan"></textarea>
-      </div>
-      <div class="form-group">
-        <input type="submit" value="Kirim Pesan" class="btn btn-primary py-3 px-5">
-      </div>
-    </form>
-  </div>
 
-  <div class="col-md-6 d-flex">
-    <div class="embed-responsive embed-responsive-4by3">
-      <div id="map-container" class="embed-responsive-item">
-        <iframe src="https://www.google.com/maps/embed?pb=!4v1618301680837!6m8!1m7!1sRnPivV_rfU9EfmXEvh6jLw!2m2!1d-6.33703479661963!2d106.8299490576092!3f262.7162197152391!4f-10.586097607517985!5f0.7820865974627469" width="100%" height="100%" frameborder="0" style="border:0;" width="600" height="450" allowfullscreen="" loading="lazy"></iframe>
-      </div>
-      <div>
-      </div>  
-    </div>
+<div class="row block-9">
+  <div class="col-md-12 order-md-last d-flex">
+    <iframe src="https://www.google.com/maps/embed?pb=!4v1618301680837!6m8!1m7!1sRnPivV_rfU9EfmXEvh6jLw!2m2!1d-6.33703479661963!2d106.8299490576092!3f262.7162197152391!4f-10.586097607517985!5f0.7820865974627469" width="100%" height="550" allowfullscreen="" loading="lazy"></iframe>
   </div>
+</div>
 </div>
 </section>
