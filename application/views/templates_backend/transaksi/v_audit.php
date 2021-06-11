@@ -4,6 +4,9 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Pendapatan</h1>
     </div>
+    <div>
+        <?php echo $this->session->flashdata('message');?>
+    </div>
 
     <div class="row">
 
@@ -40,7 +43,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-bordered" id="" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
                                     <th>Transaction ID</th>

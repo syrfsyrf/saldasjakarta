@@ -64,6 +64,9 @@
               </div>
           </div>
           <br>
+          <div>
+                <?php echo $this->session->flashdata('message');?>
+            </div>
           <div id="dibayar_text">
               <div class="row">
                 <div class="col-md-12">

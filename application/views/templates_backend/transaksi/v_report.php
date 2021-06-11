@@ -4,6 +4,9 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Report Pendapatan</h1>
     </div>
+    <div>
+        <?php echo $this->session->flashdata('message');?>
+    </div>
 
     <div class="row">
 
@@ -64,7 +67,6 @@
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="fas fa-ellipsis-v fa-sm fa-fw "></i></a>
                                                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                                    <a class="dropdown-item" href="<?php echo base_url('transaksi/delete_report/'.$row->id);?>">Delete Report</a>
                                                     <a class="dropdown-item" href="<?php echo base_url('transaksi/detail_report/'.$row->ddate_period.'/'.$row->id);?>">Detail Report</a>
                                                 </div>
                                             </div>

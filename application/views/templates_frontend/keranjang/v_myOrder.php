@@ -1,5 +1,8 @@
 <section class="ftco-section ftco-cart">
 	<div class="container">
+		<div>
+			<?php echo $this->session->flashdata('message');?>
+		</div>
 		<div class="row">
 			<div class="col-md-12 ftco-animate">
 				<div class="cart-list">
@@ -27,13 +30,15 @@
 									<td><?php if ($row->receipt != NULL) { ?>
 										<a href="#"><span class="icon icon-check"></span></a>
 									<?php } else { ?>
-										<a href="#"><span class="icon icon-plus"></span></a>
+										<a href="#"><span class="icon icon-times"></span></a>
 									<?php } ?></td>
 
 									<td><?php echo $row->total; ?></td>
 									<td><a class="btn btn-primary nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
 										<div class="dropdown-menu" aria-labelledby="dropdown04">
-											<a class="dropdown-item" href="javascript:doCancel(<?php echo $row->id; ?>);">Cancel</a>
+											<?php if ($row->dstatus == '0' || $row->dstatus == '3') { ?>
+												<a class="dropdown-item" href="javascript:doCancel(<?php echo $row->id; ?>);">Cancel</a>
+											<?php } ?>
 											<?php if ($row->transaction_id != NULL) { ?>
 												<a class="dropdown-item" href="<?php echo base_url('/main/detail/transactionID/'.$row->transaction_id); ?>">Detail</a>
 											<?php } ?>

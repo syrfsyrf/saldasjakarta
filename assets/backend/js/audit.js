@@ -1,6 +1,6 @@
-// var base_url = 'http://localhost/saldasjakarta/';
+var base_url = 'http://localhost/saldasjakarta/';
 // var base_url = window.location.host;
-var base_url = 'http://47.254.249.69/saldasjakarta/';
+// var base_url = 'http://47.254.249.69/saldasjakarta/';
 
 function getAuditData(){
     var dateStart = document.getElementById("dateStart").value;
@@ -62,9 +62,10 @@ function generateReport(){
         data : {year:year, month:month},
         success : function(data){
             if (data == true) {
-                alert("Sukses Generate Report");
+                // alert("Sukses Generate Report");
+                location.reload();
             } else {
-                alert("Gagal Generate Report");
+                alert("Report Sudah Ada Sebelumnya Silahkan Untuk Generate Ulang");
             }
         }
     });

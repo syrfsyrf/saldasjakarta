@@ -1,6 +1,9 @@
 <form method="post" action="<?php echo base_url('data/Data_order/uploadReceipt'); ?>" enctype="multipart/form-data">
 	<section class="ftco-section">
 		<div class="container">
+			<div>
+				<?php echo $this->session->flashdata('message');?>
+			</div>
 			<div class="row justify-content-center">
 				<div class="col-xl-7 ftco-animate">
 					<h3 class="mb-4 billing-heading">Billing Details</h3>

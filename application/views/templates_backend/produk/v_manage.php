@@ -5,6 +5,9 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Produk</h1>
     </div>
+    <div>
+        <?php echo $this->session->flashdata('message');?>
+    </div>
 
     <!-- Content Row -->
     <div class="row">
@@ -132,7 +135,7 @@
                                                     <?php if ($row->harga == NULL && $row->tgl_expired == NULL && $row->jumlah_stok == NULL) { ?>
                                                         <a class="dropdown-item" href="<?php echo base_url('Produk/tambah_stok/'.$row->id_produk);?>">Tambah Stok</a>
                                                     <?php } else { ?>
-                                                        <a class="dropdown-item" href="<?php echo base_url('Produk/edit/'.$row->id_produk);?>">Edit</a>
+                                                        <a class="dropdown-item" href="<?php echo base_url('Produk/detail/'.$row->id_produk);?>">Detail</a>
                                                         <a class="dropdown-item" href="<?php echo base_url('Produk/tambah_stok/'.$row->id_produk);?>">Tambah Stok Baru</a>
                                                     <?php } ?>
                                                 </div>

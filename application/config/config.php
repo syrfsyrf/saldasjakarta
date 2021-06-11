@@ -24,8 +24,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 // $config['base_url'] = 'http://localhost:8080/tugasakhir';
-// $config['base_url'] = 'http://localhost/saldasjakarta';
-$config['base_url'] = 'http://47.254.249.69/saldasjakarta/';
+$config['base_url'] = 'http://localhost/saldasjakarta';
+// $config['base_url'] = 'http://47.254.249.69/saldasjakarta/';
 
 /*
 |--------------------------------------------------------------------------

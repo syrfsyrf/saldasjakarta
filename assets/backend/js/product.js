@@ -1,6 +1,6 @@
-// var base_url = 'http://localhost/saldasjakarta/';
+var base_url = 'http://localhost/saldasjakarta/';
 // var base_url = window.location.host;
-var base_url = 'http://47.254.249.69/saldasjakarta/';
+// var base_url = 'http://47.254.249.69/saldasjakarta/';
 
 var id_pesanan = 'NULL';
 var id_user;
@@ -322,7 +322,7 @@ function checkOut(){
         data : {nama:document.getElementById("nama").value,email:document.getElementById("email").value,telp:document.getElementById("telp").value,jalan:document.getElementById("jalan").value,rt:document.getElementById("rt").value,rw:document.getElementById("rw").value,kecamatan:document.getElementById("kecamatan").value,kelurahan:document.getElementById("kelurahan").value,kota:document.getElementById("kota").value,provinsi:document.getElementById("provinsi").value,kd_pos:document.getElementById("kd_pos").value,desa:document.getElementById("desa").value,id_pesanan:id_pesanan,paymentMethod:document.getElementById("paymentMethod").value},
         success : function(data){
             if (data == true) {
-                alert("Sukses Buat Order");
+                // alert("Sukses Buat Order");
                 window.location.replace(base_url+'Main/detail/IDpesanan/'+id_pesanan);
             } else {
                 for(i=0; i<data.length; i++){
@@ -335,8 +335,23 @@ function checkOut(){
 }
 
 function doCancel(id){
-    if (id_pesanan == 'NULL') {
-        console.log('Nothing To Cancel');
+    $.ajax({
+            type    : "POST",
+            url     : base_url+'data/Data_order/cancelOrder',
+            async   : true,
+            dataType    : 'json',
+            data : {id_pesanan:id},
+            success : function(data){
+                    location.reload();
+                /*if (data == true) {
+                // alert("Sukses Buat Order");
+                } else {
+                    alert('ERROR');
+                }*/
+            }
+        });
+    /*if (id_pesanan == 'NULL') {
+        alert('Nothing To Cancel');
     } else {
         // alert(id);
         $.ajax({
@@ -346,8 +361,13 @@ function doCancel(id){
             dataType    : 'json',
             data : {id_pesanan:id},
             success : function(data){
-                location.reload();
+                if (data == true) {
+                // alert("Sukses Buat Order");
+                    location.reload();
+                } else {
+                    alert('ERROR');
+                }
             }
         });
-    }
+    }*/
 }

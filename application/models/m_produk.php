@@ -37,11 +37,14 @@ class m_produk extends CI_Model {
 	public function GetDetailProduk($param, $value)
 	{
 		if ($param == 'edit') {
-			$condition = "AND c.status = '1'";
-			$hasil = $this->db->query("SELECT a.id as 'id_produk', a.nama as 'nama_produk', b.jenis as 'kategori', c.id as 'id_stock', a.deskripsi, (SELECT nama FROM mst_user WHERE id = a.created_by) as 'created_by', a.insert_date as 'insert_date', a.file, a.path, c.jumlah_stok as 'jumlah_stok', c.harga as 'harga', c.jenis_harga_detail as 'jenis_harga_detail', c.jenis_harga as 'jenis_harga', c.tgl_expired as 'tgl_expired', c.status as 'status' FROM mst_produk a JOIN mst_kategori b ON a.id_kategori = b.id LEFT JOIN stock c ON a.id = c.id_produk WHERE a.id = '".$value."' ".$condition);
+			$condition = "";
+			$hasil = $this->db->query("SELECT a.id as 'id_produk', a.nama as 'nama_produk', b.jenis as 'kategori', c.id as 'id_stock', a.deskripsi, (SELECT nama FROM mst_user WHERE id = a.created_by) as 'created_by', DATE_FORMAT(a.insert_date, '%d %M %Y') as 'insert_date', a.file, a.path, c.jumlah_stok as 'jumlah_stok', c.harga as 'harga', c.jenis_harga_detail as 'jenis_harga_detail', c.jenis_harga as 'jenis_harga', c.tgl_expired as 'tgl_expired', c.status as 'status' FROM mst_produk a JOIN mst_kategori b ON a.id_kategori = b.id LEFT JOIN stock c ON a.id = c.id_produk WHERE a.id = '".$value."' AND c.status = '1'");
 		} elseif($param == 'stock_detail') {
 			$condition = "";
-			$hasil = $this->db->query("SELECT a.id as 'id_produk', a.nama as 'nama_produk', b.jenis as 'kategori', c.id as 'id_stock', a.deskripsi, (SELECT nama FROM mst_user WHERE id = a.created_by) as 'created_by', a.insert_date as 'insert_date', a.file, a.path, c.jumlah_stok as 'jumlah_stok', c.harga as 'harga', c.jenis_harga_detail as 'jenis_harga_detail', c.jenis_harga as 'jenis_harga', c.tgl_expired as 'tgl_expired', c.status as 'status', (SELECT jenis FROM mst_jenis_harga WHERE id = jenis_harga) as 'djenis_harga' FROM mst_produk a JOIN mst_kategori b ON a.id_kategori = b.id LEFT JOIN stock c ON a.id = c.id_produk WHERE a.id = '".$value."' ".$condition."LIMIT 1");
+			$hasil = $this->db->query("SELECT a.id as 'id_produk', a.nama as 'nama_produk', b.jenis as 'kategori', c.id as 'id_stock', a.deskripsi, (SELECT nama FROM mst_user WHERE id = a.created_by) as 'created_by', DATE_FORMAT(a.insert_date, '%d %M %Y') as 'insert_date', a.file, a.path, c.jumlah_stok as 'jumlah_stok', c.harga as 'harga', c.jenis_harga_detail as 'jenis_harga_detail', c.jenis_harga as 'jenis_harga', c.tgl_expired as 'tgl_expired', c.status as 'status', (SELECT jenis FROM mst_jenis_harga WHERE id = jenis_harga) as 'djenis_harga', (c.jumlah_stok - c.used_stok) AS 'sisa_stok' FROM mst_produk a JOIN mst_kategori b ON a.id_kategori = b.id LEFT JOIN stock c ON a.id = c.id_produk WHERE a.id = '".$value."' LIMIT 1");
+		} elseif($param == 'stock_detail1') {
+			$condition = "";
+			$hasil = $this->db->query("SELECT a.id as 'id_produk', a.nama as 'nama_produk', b.jenis as 'kategori', c.id as 'id_stock', a.deskripsi, (SELECT nama FROM mst_user WHERE id = a.created_by) as 'created_by', DATE_FORMAT(a.insert_date, '%d %M %Y') as 'insert_date', a.file, a.path, c.jumlah_stok as 'jumlah_stok', c.harga as 'harga', c.jenis_harga_detail as 'jenis_harga_detail', c.jenis_harga as 'jenis_harga', c.tgl_expired as 'tgl_expired', c.status as 'status', (SELECT jenis FROM mst_jenis_harga WHERE id = jenis_harga) as 'djenis_harga', (c.jumlah_stok - c.used_stok) AS 'sisa_stok' FROM mst_produk a JOIN mst_kategori b ON a.id_kategori = b.id LEFT JOIN stock c ON a.id = c.id_produk WHERE a.id = '".$value."'");
 		}
 		return $hasil;
 	}
@@ -136,4 +139,17 @@ class m_produk extends CI_Model {
 		$hasil = $this->db->query("SELECT a.id as 'id_produk', a.nama as 'nama_produk', b.jenis as 'kategori', c.id as 'id_stock', a.deskripsi, (SELECT nama FROM mst_user WHERE id = a.created_by) as 'created_by', a.insert_date as 'insert_date', a.file, a.path, c.jumlah_stok as 'jumlah_stok', c.harga as 'harga', FORMAT(c.harga, 'c') as 'dharga', c.jenis_harga_detail as 'jenis_harga_detail', c.jenis_harga as 'jenis_harga', c.tgl_expired as 'tgl_expired', c.status as 'status', (SELECT jenis FROM mst_jenis_harga WHERE id = jenis_harga) as 'djenis_harga', (c.jumlah_stok - c.used_stok) AS 'sisa_stok' FROM mst_produk a JOIN mst_kategori b ON a.id_kategori = b.id JOIN stock c ON a.id = c.id_produk WHERE c.status = '1' AND a.id = '".$value."'");
 		return $hasil;		
 	}
+
+	public function getDetailStock($param, $value){
+		if ($param == 'qty') {
+			$condition = "";
+			$hasil = $this->db->query("SELECT a.transaction_id, (SELECT jenis FROM mst_metode_pembayaran WHERE id = a.metode_pembayaran) AS 'metode_pembayaran', a.tgl_pembayaran, b.kuantitas, c.harga, FORMAT((b.harga_stock * b.kuantitas), 'c') as 'total_produk' FROM pesanan a JOIN pesanan_detail b ON a.id = b.id_pesanan JOIN stock c ON b.id_stock = c.id WHERE c.id = '".$value."' AND a.status = '1'");
+		} elseif($param == 'stock') {
+			$condition = "";
+			$hasil = $this->db->query("SELECT a.id as 'id_produk', a.nama as 'nama_produk', b.jenis as 'kategori', c.id as 'id_stock', a.deskripsi, (SELECT nama FROM mst_user WHERE id = a.created_by) as 'created_by', DATE_FORMAT(a.insert_date, '%d %M %Y') as 'insert_date', a.file, a.path, c.jumlah_stok as 'jumlah_stok', c.harga as 'harga', c.jenis_harga_detail as 'jenis_harga_detail', c.jenis_harga as 'jenis_harga', c.tgl_expired as 'tgl_expired', c.status as 'status', (SELECT jenis FROM mst_jenis_harga WHERE id = jenis_harga) as 'djenis_harga', (c.jumlah_stok - c.used_stok) AS 'sisa_stok' FROM mst_produk a JOIN mst_kategori b ON a.id_kategori = b.id LEFT JOIN stock c ON a.id = c.id_produk WHERE c.id = '".$value."' LIMIT 1");
+		} 
+
+		return $hasil;
+	}
+
 }

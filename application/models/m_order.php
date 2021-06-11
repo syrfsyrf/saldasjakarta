@@ -13,7 +13,7 @@ class m_order extends CI_Model {
 	}
 
 	public function getUserOrder() {
-		$hasil = $this->db->query("SELECT a.id, a.transaction_id, (SELECT jenis FROM mst_metode_pembayaran WHERE id = a.metode_pembayaran) AS 'metode_pembayaran', (SELECT status FROM tb_status_pesanan WHERE id = a.status) AS 'status', a.insert_date AS 'transaction_date', a.total, (SELECT approved_date FROM order_job WHERE id_pesanan = a.id) AS 'approved_date', (SELECT file FROM order_job WHERE id_pesanan = a.id) AS 'receipt' FROM pesanan a WHERE a.id_user = '".$_SESSION['logged_in']['id_user']."' ORDER BY a.insert_date DESC");
+		$hasil = $this->db->query("SELECT a.id, a.transaction_id, (SELECT jenis FROM mst_metode_pembayaran WHERE id = a.metode_pembayaran) AS 'metode_pembayaran', (SELECT detail FROM tb_status_pesanan WHERE id = a.status) AS 'status', a.status AS 'dstatus', a.insert_date AS 'transaction_date', a.total, (SELECT approved_date FROM order_job WHERE id_pesanan = a.id) AS 'approved_date', (SELECT file FROM order_job WHERE id_pesanan = a.id) AS 'receipt' FROM pesanan a WHERE a.id_user = '".$_SESSION['logged_in']['id_user']."' ORDER BY a.insert_date DESC");
 		return $hasil;
 	}
 

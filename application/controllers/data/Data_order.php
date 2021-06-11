@@ -98,7 +98,18 @@ class Data_order extends CI_Controller{
     public function cancelOrder(){
         $id_pesanan = $this->input->post('id_pesanan');
         $hasil = $this->m_order->cancelOrder($id_pesanan);
-        echo json_encode($hasil);
+        if ($hasil == TRUE) {
+            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
+             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+             <i class="icon fas fa-check"></i> Cancel Order Sukses
+             </div>');
+            echo json_encode($hasil);
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible">
+             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+             <i class="icon fas fa-times"></i> Cancel Order Gagal
+             </div>');
+        }
     }
 
     public function checkOut($param){
@@ -110,7 +121,18 @@ class Data_order extends CI_Controller{
                 echo json_encode($hasil);
             } else {
                 $hasil2 = $this->m_order->checkOutCash($id_pesanan);
-                echo json_encode($hasil2);
+                if ($hasil2 == TRUE) {
+                    $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
+                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                     <i class="icon fas fa-check"></i> Transaksi Sukses
+                     </div>');
+                    echo json_encode($hasil2);
+                } else {
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible">
+                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                     <i class="icon fas fa-times"></i> Transaksi Gagal
+                     </div>');
+                }
             }
         } elseif ($param == 'ORDER') {
             $nama = $this->input->post('nama');
@@ -135,7 +157,18 @@ class Data_order extends CI_Controller{
             } else {
                 // echo "gaada";
                 $hasil2 = $this->m_order->checkOut($id_pesanan, $ketOrder, $paymentMethod);
-                echo json_encode($hasil2);
+                if ($hasil2 == TRUE) {
+                    $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
+                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                     <i class="icon fas fa-check"></i> Transaksi Sukses
+                     </div>');
+                    echo json_encode($hasil2);
+                } else {
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible">
+                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                     <i class="icon fas fa-times"></i> Transaksi Gagal
+                     </div>');
+                }
             }
         }
     }
@@ -160,10 +193,17 @@ class Data_order extends CI_Controller{
             $status_sukses_file = 'SUKSES';
             $result = $this->m_file->updateReceipt($id_pesanan, $filename, $directory);
             if ($result == TRUE) {
-                // echo $status_sukses_file;
+                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
+                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                 <i class="icon fas fa-check"></i> Upload Bukti Transfer Sukses
+                 </div>');
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
             } else {
-                echo "gagal";
+                $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible">
+                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                 <i class="icon fas fa-times"></i> Upload Bukti Transfer Gagal
+                 </div>');
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
             }
         }
     }

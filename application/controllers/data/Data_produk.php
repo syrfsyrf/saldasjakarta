@@ -29,9 +29,17 @@ class Data_produk extends CI_Controller{
 
         $result = $this->m_produk->insertUpdateStock('INSERT', $dataStock);
         if ($result == TRUE) {
+            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
+                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                   <i class="icon fas fa-check"></i> Sukses Menambahkan Stock
+                   </div>');
             redirect('Produk/manage');
         } else {
-
+            $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible">
+                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                   <i class="icon fas fa-times"></i> Gagal Menambahkan Stock
+                   </div>');
+            redirect('Produk/manage');
         }
     }
 
@@ -46,9 +54,17 @@ class Data_produk extends CI_Controller{
 
         $result = $this->m_produk->insertUpdateProduk('INSERT', $dataProduk);
         if ($result == TRUE) {
+            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
+                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                   <i class="icon fas fa-check"></i> Sukses Menambahkan Produk
+                   </div>');
             redirect('Produk/manage');
         } else {
-
+            $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible">
+                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                   <i class="icon fas fa-times"></i> Gagal Menambahkan Produk
+                   </div>');
+            redirect('Produk/manage');
         }
     }
 
@@ -76,17 +92,31 @@ class Data_produk extends CI_Controller{
         );
         $this->load->library('upload', $config);
         if (!$this->upload->do_upload('file_produk')) {
-            $status_sukses_file = 'GAGAL';
-            echo $status_sukses_file;
+            // $status_sukses_file = 'GAGAL';
+            // echo $status_sukses_file;
+            $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible">
+                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                   <i class="icon fas fa-times"></i> Gagal Upload File
+                   </div>');
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
         } else {
             $filename = $this->upload->data('file_name');
             $status_sukses_file = 'SUKSES';
             $result = $this->m_file->updateProduk($id_produk, $filename, $path);
             if ($result == TRUE) {
                 // echo $status_sukses_file;
+                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
+                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                   <i class="icon fas fa-check"></i> Sukses Upload File
+                   </div>');
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
             } else {
-                echo "gagal";
+                // echo "gagal";
+                $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible">
+                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                   <i class="icon fas fa-times"></i> Gagal Upload File
+                   </div>');
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
             }
         }
     }

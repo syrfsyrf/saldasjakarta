@@ -4,8 +4,11 @@
 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
 		<h1 class="h3 mb-0 text-gray-800">Tambah Produk</h1>
 	</div>
+	<div>
+        <?php echo $this->session->flashdata('message');?>
+    </div>
 	<form action="<?php echo base_url('data/Data_produk/insertProduk'); ?>" method="post">
-	<!-- Content Row -->
+	<!-- Content Row  -->
 	<div class="row">
 
 		<!-- Content Column -->
@@ -22,7 +25,7 @@
 						<label for="user" class="col-sm-2 col-form-label">Kategori</label>
 						<div class="col-sm-4">
 							<select class="form-control" name="id_kategori" id="id_kategori">
-								<option value="0">Kategori</option>
+								<option value="0">-Pilih Kategori-</option>
 								<?php foreach($getkategori->result() as $row): ?>
 									<option value="<?php echo $row->id;?>"><?php echo $row->jenis;?></option>
 								<?php endforeach;?>
@@ -44,9 +47,20 @@
 			</div>
 
 			<div class="card shadow mb-4">
-				<button class="btn btn-primary btn-icon-split" type="Submit"><span class="text">Submit Produk</span></button>
+				<button class="btn btn-primary btn-icon-split" type="Submit" id="submit_prod"><span class="text">Submit Produk</span></button>
 			</div>
 		</div>
 	</div>
 	</form>
 </div>
+<script type="text/javascript">
+	$('#submit_prod').on('click', function() {
+		var id_kategori    =$('#id_kategori').val();
+		if (id_kategori == '0') {
+			alert('INVALID KATEGORI');
+			return false;
+		} else {
+			return true;
+		}
+	});
+</script>

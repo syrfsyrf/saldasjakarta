@@ -18,9 +18,7 @@ class Login extends CI_Controller{
                 redirect(base_url('Dashboard'));
             }
         } else {
-            // $this->load->view('templates_frontend/v_header');
             $this->load->view('templates_frontend/login/v_login');
-            // $this->load->view('templates_frontend/v_footer');   
         }
     }
 

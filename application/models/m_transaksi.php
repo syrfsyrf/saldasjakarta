@@ -14,7 +14,7 @@ class m_transaksi extends CI_Model {
 	}
 
 	public function getAuditData($dateStart, $dateEnd) {
-			$hasil = $this->db->query("SELECT id, transaction_id, (SELECT jenis FROM mst_metode_pembayaran WHERE id = metode_pembayaran) AS 'metode_pembayaran', DATE_FORMAT(tgl_pembayaran, '%d %M %Y') AS 'tgl_pembayaran', total, FORMAT(total, 'c') AS 'dtotal' FROM pesanan WHERE status = '1' AND (tgl_pembayaran BETWEEN '".$dateStart."' AND '".$dateEnd."')");
+			$hasil = $this->db->query("SELECT id, transaction_id, (SELECT jenis FROM mst_metode_pembayaran WHERE id = metode_pembayaran) AS 'metode_pembayaran', DATE_FORMAT(tgl_pembayaran, '%d %M %Y') AS 'tgl_pembayaran', total, FORMAT(total, 'c') AS 'dtotal' FROM pesanan WHERE status = '1' AND ((DATE(tgl_pembayaran) BETWEEN '".$dateStart."' AND '".$dateEnd."')");
 			return $hasil->result();
 	}
 
@@ -22,7 +22,22 @@ class m_transaksi extends CI_Model {
 		$cek = $this->db->query("SELECT * FROM report WHERE bulan_tahun = '".$year."-".$month."-01'")->num_rows();
 
         if ($cek > 0) {
-            return FALSE;
+            $this->db->trans_start();
+			// $this->db->insert('pesanan_detail', $data);
+			$this->db->query("
+				UPDATE report SET total = (SELECT
+				    SUM(total)
+				FROM pesanan WHERE status = '1' AND (YEAR(tgl_pembayaran) = '".$year."' AND MONTH(tgl_pembayaran) = '".$month."')) WHERE bulan_tahun = '".$year."-".$month."-01'");
+			$this->db->trans_complete(); 
+
+			if ($this->db->trans_status() === FALSE) {
+				$this->db->trans_rollback();
+				return FALSE;
+			} 
+			else {
+				$this->db->trans_commit();
+				return TRUE;
+			}
         } else {
             $this->db->trans_start();
 			// $this->db->insert('pesanan_detail', $data);

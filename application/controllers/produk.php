@@ -32,12 +32,12 @@ class Produk extends CI_Controller{
         $this->load->view('templates_backend/v_footer');
     }
 
-    public function edit($value)
+    public function detail($value)
     {
         $array['menuparent'] = $this->m_menu->GetMenuParent();
         $array['menuchild'] = $this->m_menu->GetMenuChild();
         $data['getproduk'] = $this->m_produk->GetDetailProduk('edit', $value);
-        $data['getproduk2'] = $this->m_produk->GetDetailProduk('stock_detail', $value);
+        $data['getproduk2'] = $this->m_produk->GetDetailProduk('stock_detail1', $value);
         $this->load->view('templates_backend/v_header', $array);
         $this->load->view('templates_backend/produk/v_edit', $data);
         $this->load->view('templates_backend/v_footer');
@@ -62,6 +62,17 @@ class Produk extends CI_Controller{
         $data['getJenisHarga'] = $this->m_produk->GetJenisHarga();
         $this->load->view('templates_backend/v_header', $array);
         $this->load->view('templates_backend/produk/v_tambah_stok', $data);
+        $this->load->view('templates_backend/v_footer');
+    }
+
+    public function detail_stok($value)
+    {
+        $array['menuparent'] = $this->m_menu->GetMenuParent();
+        $array['menuchild'] = $this->m_menu->GetMenuChild();
+        $data['getDetailStock'] = $this->m_produk->getDetailStock('qty', $value);
+        $data['getStock'] = $this->m_produk->getDetailStock('stock', $value);
+        $this->load->view('templates_backend/v_header', $array);
+        $this->load->view('templates_backend/produk/v_detail_stok', $data);
         $this->load->view('templates_backend/v_footer');
     }
 }

@@ -5,6 +5,9 @@
 		<div class="d-sm-flex align-items-center justify-content-between mb-4">
 			<h1 class="h3 mb-0 text-gray-800">Detail Transaction</h1>
 		</div>
+		<div>
+	        <?php echo $this->session->flashdata('message');?>
+	    </div>
 
 		<!-- Content Row -->
 		<form action="<?php echo base_url('data/Data_transaksi/approvePembayaran'); ?>" method="post">
@@ -23,24 +26,24 @@
 								<label for="password" class="col-sm-12 col-form-label">Transaction ID</label>
 								<div class="col-sm-12">
 									<input type="hidden" required class="form-control" id="id_pesanan" name="id_pesanan" placeholder="..." value="<?php echo $row->id_pesanan;?>">
-									<input type="text" class="form-control" name="transaction_id" id="transaction_id" placeholder="..." value="<?php echo $row->transaction_id;?>">
+									<input type="text" readonly class="form-control" name="transaction_id" id="transaction_id" placeholder="..." value="<?php echo $row->transaction_id;?>">
 								</div>
 							</div>
 							<div class="form-group row">
 								<label for="password" class="col-sm-12 col-form-label">Metode Pembayaran</label>
 								<div class="col-sm-12">
-									<input type="text" class="form-control" placeholder="..." value="<?php echo $row->metode_pembayaran;?>">
+									<input type="text" readonly class="form-control" placeholder="..." value="<?php echo $row->metode_pembayaran;?>">
 								</div>
 							</div>
 							<div class="form-group row">
 								<label for="user" class="col-sm-2 col-form-label">Status</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" placeholder="..." value="<?php echo $row->status;?>">
+									<input type="text" readonly class="form-control" placeholder="..." value="<?php echo $row->status;?>">
 								</div>
 								<label class="col-sm-2 col-form-label">Receipt</label>
 								<div class="col-sm-4">
 									<?php if ($row->file == NULL) { ?>
-										<input type="text" class="form-control" placeholder="..." value="Receipt Not Available">
+										<input type="text" readonly class="form-control" placeholder="..." value="Receipt Not Available">
 									<?php } else { ?>
 										<a href="<?php echo base_url('data/Data_order/download/'.$row->id_pesanan); ?>" class="btn btn-primary btn-icon-split form-control" type="Submit"><span class="text">Download Receipt</span></a>
 									<?php } ?>
@@ -77,10 +80,7 @@
 					<br>
 					<?php if ($row->dstatus == '3' && $row->file != NULL) { ?>
 						<div class="row">
-							<div class="col-md-6">
-								<input id="submit-reject" type="submit" class="btn btn-danger btn-block" name="submit" value="Reject">
-							</div>
-							<div class="col-md-6">
+							<div class="col-md-12">
 								<!-- <button class="btn btn-primary btn-block"><span class="text">Approve</span></button>   -->
 								<input id="submit-approve" type="submit" class="btn btn-primary btn-block" name="submit" value="Approve">
 							</div>

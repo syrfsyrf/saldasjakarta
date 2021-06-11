@@ -44,11 +44,11 @@
                         <?php echo $this->session->flashdata('message');?>
                             <div class="form-group">
                                 <label for="">Password</label>
-                                <input type="password" class="form-control text-left px-3" name="resetpass" placeholder="">
+                                <input type="password" required class="form-control text-left px-3" name="resetpass" placeholder="">
                             </div>
                             <div class="form-group">
                                 <label for="country">Konfirmasi Password</label>
-                                <input type="password" class="form-control text-left px-3" name="resetpass2" placeholder="">
+                                <input type="password" required class="form-control text-left px-3" name="resetpass2" placeholder="">
                             </div>
                         
                     <p><button type="submit" class="btn btn-primary py-3 px-4">Reset Password</button></p>

@@ -36,10 +36,17 @@ class Data_transaksi extends CI_Controller{
         // print_r($data);
         $result = $this->m_pembayaran->approvePembayaran($id_pesanan, $data, $tgl_pembayaran);
         if ($result == TRUE) {
-            // echo "sukses";
+            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
+                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                   <i class="icon fas fa-check"></i> Sukses Approve Pembayaran
+                   </div>');
             header('Location: ' . $_SERVER['HTTP_REFERER']);
         } else {
-            echo "Gagal";
+            $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible">
+                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                   <i class="icon fas fa-times"></i> Gagal Approve Pembayaran
+                   </div>');
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
         }
     }
 
@@ -54,6 +61,18 @@ class Data_transaksi extends CI_Controller{
         $year = $this->input->post('year');
         $month = $this->input->post('month');
         $hasil = $this->m_transaksi->generateReport($year, $month);
-        echo json_encode($hasil);
+        if ($hasil == TRUE) {
+            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
+                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                   <i class="icon fas fa-check"></i> Sukses Generate Report
+                   </div>');
+            echo json_encode($hasil);
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible">
+                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                   <i class="icon fas fa-times"></i> Gagal Generate Report
+                   </div>');
+            echo json_encode($hasil);
+        }
     }
 }
