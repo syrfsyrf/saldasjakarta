@@ -31,7 +31,7 @@
 								<th>&nbsp;</th>
 								<th>&nbsp;</th>
 								<th>&nbsp;</th>
-								<th><a href="<?php echo base_url('/main/bayar'); ?>" class="btn btn-primary py-3 px-4">Check Out</a></th>
+								<th><a href="<?php echo base_url('/main/bayar'); ?>" class="btn btn-primary py-3 px-4" id="checkbtn">Check Out</a></th>
 							</tr>
 						</tfoot>
 					</table>
@@ -50,6 +50,7 @@ if(!isset($_SESSION['logged_in']['username'])){
 	<script src="<?php echo base_url() ?>/assets/backend/js/general.js"></script>
 	<script src="<?php echo base_url() ?>/assets/backend/js/product.js"></script>
 	<script type="text/javascript">
+		document.getElementById('checkbtn').style.display = 'none';
 		getUserLastOrder('DETAIL', <?php echo $_SESSION['logged_in']['id_user']; ?>);
 	</script>
 	<?php } ?>

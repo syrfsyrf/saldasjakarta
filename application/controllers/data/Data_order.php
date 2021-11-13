@@ -37,8 +37,8 @@ class Data_order extends CI_Controller{
         echo json_encode($hasil);
     }
 
-    public function getDetailOrder($id){
-        $hasil = $this->m_order->getDetailOrder($id);
+    public function getDetailOrder(){
+        $hasil = $this->m_order->getDetailOrder();
         echo json_encode($hasil);
     }
 
@@ -48,35 +48,41 @@ class Data_order extends CI_Controller{
     }
 
     public function addOrder(){
-        $id_stock = $this->input->post('id_stock');
-        $id_pesanan = $this->input->post('id_pesanan');
-
-        $data = array(
-            'id_stock' => $id_stock,
-            'id_pesanan' => $id_pesanan);
-
-        $cek = $this->m_order->cekAvailOrder($data)->num_rows();
-
-        if ($cek > 0) {
-            $hasil = $this->m_order->updateOrder($id_pesanan, $id_stock);
+        if(!isset($_SESSION['logged_in']['username'])){
+            $hasil = array(
+                'RESPOND_CODE' => '00',
+                'MESSAGE' => 'NOT LOGGED IN'
+            );
             echo json_encode($hasil);
         } else {
-            $hasil = $this->m_order->insertOrder($id_pesanan, $id_stock);
+            $id_stock = $this->input->post('id_stock');
+            $qty = $this->input->post('qty');
+
+            $hasil = $this->m_order->addOrder($id_stock, $qty)->result();
             echo json_encode($hasil);
         }
+
 
     }
 
     public function generateOrder(){
-        $id_user = $this->input->post('id_user');
-        $metode_pembayaran = $this->input->post('metode_pembayaran');
+        if(!isset($_SESSION['logged_in']['username'])){
+            $hasil = array(
+                'RESPOND_CODE' => '00',
+                'MESSAGE' => 'NOT LOGGED IN'
+            );
+            echo json_encode($hasil);
+        } elseif ($_SESSION['logged_in']['login'] == 'LOGGED' && $_SESSION['logged_in']['aktivasi'] == '1') {
+            $id_user = $this->input->post('id_user');
+            $metode_pembayaran = $this->input->post('metode_pembayaran');
 
-        $data = array(
-            'id_user' => $id_user,
-            'metode_pembayaran' => $metode_pembayaran);
+            $data = array(
+                'id_user' => $id_user,
+                'metode_pembayaran' => $metode_pembayaran);
 
-        $hasil = $this->m_order->generateOrder($data);
-        echo json_encode($hasil);
+            $hasil = $this->m_order->generateOrder($data);
+            echo json_encode($hasil);
+        }
     }
 
     public function deleteOrder(){
@@ -85,8 +91,8 @@ class Data_order extends CI_Controller{
         echo json_encode($hasil);
     }
 
-    public function sumOrder($id){
-        $hasil = $this->m_order->sumOrder($id);
+    public function sumOrder(){
+        $hasil = $this->m_order->sumOrder();
         echo json_encode($hasil);
     }
 
@@ -100,15 +106,15 @@ class Data_order extends CI_Controller{
         $hasil = $this->m_order->cancelOrder($id_pesanan);
         if ($hasil == TRUE) {
             $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
-             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-             <i class="icon fas fa-check"></i> Cancel Order Sukses
-             </div>');
+               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+               <i class="icon fas fa-check"></i> Cancel Order Sukses
+               </div>');
             echo json_encode($hasil);
         } else {
             $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible">
-             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-             <i class="icon fas fa-times"></i> Cancel Order Gagal
-             </div>');
+               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+               <i class="icon fas fa-times"></i> Cancel Order Gagal
+               </div>');
         }
     }
 
@@ -123,15 +129,16 @@ class Data_order extends CI_Controller{
                 $hasil2 = $this->m_order->checkOutCash($id_pesanan);
                 if ($hasil2 == TRUE) {
                     $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
-                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                     <i class="icon fas fa-check"></i> Transaksi Sukses
-                     </div>');
+                       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                       <i class="icon fas fa-check"></i> Transaksi Sukses
+                       </div>');
                     echo json_encode($hasil2);
                 } else {
                     $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible">
-                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                     <i class="icon fas fa-times"></i> Transaksi Gagal
-                     </div>');
+                       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                       <i class="icon fas fa-times"></i> Transaksi Gagal
+                       </div>');
+                    echo json_encode($hasil2);
                 }
             }
         } elseif ($param == 'ORDER') {
@@ -159,15 +166,15 @@ class Data_order extends CI_Controller{
                 $hasil2 = $this->m_order->checkOut($id_pesanan, $ketOrder, $paymentMethod);
                 if ($hasil2 == TRUE) {
                     $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
-                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                     <i class="icon fas fa-check"></i> Transaksi Sukses
-                     </div>');
+                       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                       <i class="icon fas fa-check"></i> Transaksi Sukses
+                       </div>');
                     echo json_encode($hasil2);
                 } else {
                     $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible">
-                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                     <i class="icon fas fa-times"></i> Transaksi Gagal
-                     </div>');
+                       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                       <i class="icon fas fa-times"></i> Transaksi Gagal
+                       </div>');
                 }
             }
         }
@@ -194,15 +201,15 @@ class Data_order extends CI_Controller{
             $result = $this->m_file->updateReceipt($id_pesanan, $filename, $directory);
             if ($result == TRUE) {
                 $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
-                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                 <i class="icon fas fa-check"></i> Upload Bukti Transfer Sukses
-                 </div>');
+                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                   <i class="icon fas fa-check"></i> Upload Bukti Transfer Sukses
+                   </div>');
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
             } else {
                 $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible">
-                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                 <i class="icon fas fa-times"></i> Upload Bukti Transfer Gagal
-                 </div>');
+                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                   <i class="icon fas fa-times"></i> Upload Bukti Transfer Gagal
+                   </div>');
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
             }
         }

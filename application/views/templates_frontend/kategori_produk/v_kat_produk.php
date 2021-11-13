@@ -10,7 +10,7 @@
                     <ul class="product-category">
                         <li><a href="javascript:;" class="active">All</a></li>
                         <?php foreach($getKategori->result() as $row): ?>
-                            <!-- <li><a href="javascript:getOrder(<?php echo $row->id;?>, 'SPESIFIK');" class="active"><?php echo $row->jenis;?></a></li> -->
+                            <li><a href="javascript:getOrder(<?php echo $row->id;?>, 'SPESIFIK');" class="active"><?php echo $row->jenis;?></a></li>
                         <?php endforeach; ?>
                     </ul>
                 </div>

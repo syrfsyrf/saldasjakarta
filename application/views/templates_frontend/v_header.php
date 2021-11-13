@@ -106,11 +106,11 @@ if(!isset($_SESSION['logged_in']['username'])){
  <script src="<?php echo base_url() ?>/assets/backend/js/general.js"></script>
  <script src="<?php echo base_url() ?>/assets/backend/js/product.js"></script>
  <script type="text/javascript">
-            getUserLastOrder('SUM', <?php echo $_SESSION['logged_in']['id_user']; ?>);
+            /*getUserLastOrder('SUM', <?php echo $_SESSION['logged_in']['id_user']; ?>);
             getUserAvailablity(<?php echo $_SESSION['logged_in']['id_user']; ?>);
             setInterval(interval, 3000);
             function interval() {
               getUserAvailablity(<?php echo $_SESSION['logged_in']['id_user']; ?>);
-            }
+            }*/
           </script>
           <?php } ?>

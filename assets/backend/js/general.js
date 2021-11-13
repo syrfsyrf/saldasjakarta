@@ -1,13 +1,14 @@
-function getDetailOrder(param, id){
+function getDetailOrder(param){
 	html = '';
 	$.ajax({
 		type    : 'ajax',
-		url     : base_url+'data/Data_order/getDetailOrder/'+id,
+		url     : base_url+'data/Data_order/getDetailOrder',
 		async   : true,
 		dataType    : 'json',
 		success : function(data){
 			if (!$.trim(data)){
 				total_cart = '0';
+				document.getElementById('checkbtn').style.display = 'none';	
 			} else {
 				if (param == 'SUM') {
 					total_cart = data.length;
@@ -29,6 +30,8 @@ function getDetailOrder(param, id){
 						'<td class="total">Rp '+data[i].total_produk+'</td>'+
 						'</tr>';
 					}
+
+					document.getElementById('checkbtn').style.display = 'block';
 				} else if (param == 'CART.SUMMARY') {
 					var i;
 					for(i=0; i<data.length; i++){
@@ -42,10 +45,10 @@ function getDetailOrder(param, id){
 			}
 			if (param == 'DETAIL') {
 				$('#targetOrder').html(html);
-				sumOrder(param, id);
+				sumOrder(param);
 			} else if (param == 'CART.SUMMARY') {
 				$('#cart_summary').html(html);
-				sumOrder(param, id);
+				sumOrder(param);
 			} else if (param == 'SUM') {
 				$('#total_cart').html('['+total_cart+']');
 			}

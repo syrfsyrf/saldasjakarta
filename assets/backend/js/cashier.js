@@ -117,7 +117,7 @@ function deleteOrder(param){
         dataType    : 'json',
         data : {id_pesanan:param},
         success : function(data){
-            getDetailOrder(id_pesanan);
+            getDetailOrder();
             sumOrder(id_pesanan);
         }
     });
@@ -147,7 +147,7 @@ function doCheckOut(){
         var x = document.getElementById("dibayar_text");
         if (x.style.display === "none") {
             x.style.display = "block";
-        } 
+        }
     }
 }
 
@@ -240,14 +240,9 @@ function addOrder(id_stock){
             url     : base_url+'data/Data_order/addOrder',
             async   : true,
             dataType    : 'json',
-            data : {id_stock:id_stock, id_pesanan:id_pesanan},
+            data : {id_stock:id_stock, qty:1},
             success : function(data){
-                if (data == true) {
-                    // console.log('im TRUE');
-                    getDetailOrder(id_pesanan);
-                } else {
-                    console.log('im FALSE');
-                }
+                getDetailOrder();
                 // $('#show_log').html(html);
                 // console.log('im here');
             }

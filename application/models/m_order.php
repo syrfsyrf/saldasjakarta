@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class m_order extends CI_Model {
 
 	public function getKategori($param) {
-		$hasil = $this->db->query("SELECT id, jenis FROM mst_kategori");
+		$hasil = $this->db->query("SELECT id, jenis FROM mst_kategori WHERE is_active = '1'");
 		if ($param == 'PHP') {
 			return $hasil;
 		} elseif ($param == 'JS') {
@@ -13,7 +13,7 @@ class m_order extends CI_Model {
 	}
 
 	public function getUserOrder() {
-		$hasil = $this->db->query("SELECT a.id, a.transaction_id, (SELECT jenis FROM mst_metode_pembayaran WHERE id = a.metode_pembayaran) AS 'metode_pembayaran', (SELECT detail FROM tb_status_pesanan WHERE id = a.status) AS 'status', a.status AS 'dstatus', a.insert_date AS 'transaction_date', a.total, (SELECT approved_date FROM order_job WHERE id_pesanan = a.id) AS 'approved_date', (SELECT file FROM order_job WHERE id_pesanan = a.id) AS 'receipt' FROM pesanan a WHERE a.id_user = '".$_SESSION['logged_in']['id_user']."' ORDER BY a.insert_date DESC");
+		$hasil = $this->db->query("SELECT a.id, a.transaction_id, (SELECT jenis FROM mst_metode_pembayaran WHERE id = a.metode_pembayaran) AS 'metode_pembayaran', (SELECT detail FROM tb_status_pesanan WHERE id = a.status) AS 'status', a.status AS 'dstatus', a.insert_date AS 'transaction_date', a.total, (SELECT approved_date FROM order_job WHERE id_pesanan = a.id) AS 'approved_date', (SELECT file FROM order_job WHERE id_pesanan = a.id) AS 'receipt' FROM pesanan a WHERE a.id_user = '".$_SESSION['logged_in']['id_user']."' AND a.status != '0' ORDER BY a.insert_date DESC");
 		return $hasil;
 	}
 
@@ -49,8 +49,10 @@ class m_order extends CI_Model {
 		return $hasil->result();
 	}
 
-	public function getDetailOrder($id) {
-		$hasil = $this->db->query("SELECT a.id as 'id', a.id_pesanan as 'id_pesanan', a.id_produk, FORMAT(a.harga_stock, 'c') as 'harga_stock', a.kuantitas, FORMAT((a.harga_stock * a.kuantitas), 'c') as 'total_produk', b.file, b.path, b.nama as 'produk' FROM pesanan_detail a JOIN mst_produk b ON a.id_produk = b.id JOIN stock c ON a.id_stock = c.id WHERE a.id_pesanan = '".$id."'");
+	public function getDetailOrder() {
+		$hasil = $this->db->query("SELECT a.id as 'id', a.id_pesanan as 'id_pesanan', a.id_produk, FORMAT(a.harga_stock, 'c') as 'harga_stock', a.kuantitas, 
+			FORMAT((a.harga_stock * a.kuantitas), 'c') as 'total_produk', b.file, b.path, b.nama as 'produk' 
+			FROM pesanan_detail a JOIN mst_produk b ON a.id_produk = b.id JOIN stock c ON a.id_stock = c.id WHERE a.id_pesanan = (SELECT id FROM pesanan WHERE id_user = '".$_SESSION['logged_in']['id_user']."' ORDER BY insert_date DESC LIMIT 1)");
 		return $hasil->result();
 	}
 
@@ -58,7 +60,12 @@ class m_order extends CI_Model {
 		return $this->db->get_where('pesanan_detail', $data);
 	}
 
-	public function insertOrder($id_pesanan_detail, $id_stock){
+	public function addOrder($id_stock, $qty) {
+		$this->db->query("CALL PROCaddOrder(".$id_stock.", ".$_SESSION['logged_in']['id_user'].", ".$qty.", @p5, @p6)");
+		return $this->db->query("SELECT @p5 AS 'OUTcd', @p6 AS 'OUTmsg'");
+	}
+
+	/*public function insertOrder($id_pesanan_detail, $id_stock){
 		$this->db->trans_start();
 		// $this->db->insert('pesanan_detail', $data);
 		$this->db->query("
@@ -81,9 +88,9 @@ class m_order extends CI_Model {
 			$this->db->trans_commit();
 			return TRUE;
 		}
-	}
+	}*/
 
-	public function updateOrder($id_pesanan, $id_stock){
+	/*public function updateOrder($id_pesanan, $id_stock){
 		$this->db->trans_start();
 		// $this->db->insert('pesanan_detail', $data);
 		$this->db->query("
@@ -98,7 +105,7 @@ class m_order extends CI_Model {
 			$this->db->trans_commit();
 			return TRUE;
 		}
-	}
+	}*/
 
 	public function cancelOrder($id_pesanan){
 		$this->db->trans_start();
@@ -117,8 +124,8 @@ class m_order extends CI_Model {
 		}
 	}
 
-	public function sumOrder($id) {
-		$hasil = $this->db->query("SELECT CASE WHEN FORMAT(SUM((harga_stock * kuantitas)), 'c') IS NULL THEN 0 ELSE FORMAT(SUM((harga_stock * kuantitas)), 'c') END AS 'total_order', SUM((harga_stock * kuantitas)) as 'total_order_nof' FROM pesanan_detail WHERE id_pesanan = '".$id."'");
+	public function sumOrder() {
+		$hasil = $this->db->query("SELECT CASE WHEN FORMAT(SUM((harga_stock * kuantitas)), 'c') IS NULL THEN 0 ELSE FORMAT(SUM((harga_stock * kuantitas)), 'c') END AS 'total_order', SUM((harga_stock * kuantitas)) as 'total_order_nof' FROM pesanan_detail WHERE id_pesanan = (SELECT id FROM pesanan WHERE id_user = '".$_SESSION['logged_in']['id_user']."' ORDER BY insert_date DESC LIMIT 1)");
 		return $hasil->result();
 	}
 
@@ -156,7 +163,7 @@ class m_order extends CI_Model {
 
 
 	public function checkOutCash($id_pesanan){
-		$this->db->trans_start();
+		/*$this->db->trans_start();
 		$array['data_stock'] = $this->db->query("SELECT id FROM pesanan_detail WHERE id_pesanan = '".$id_pesanan."'");
 		foreach($array['data_stock']->result() as $row ):
 			$this->db->query("
@@ -173,11 +180,15 @@ class m_order extends CI_Model {
 		else {
 			$this->db->trans_commit();
 			return TRUE;
-		}
+		}*/
+
+		$this->db->query("CALL PROCcheckOutOrder('OF', ".$id_pesanan.", '1', '',@p5,@p6)");
+		// if ($this->db->query("SELECT @p5 AS 'OUTcd'") == '200') {}
+		return TRUE;
 	}
 
 	public function checkOut($id_pesanan, $ketOrder, $metode_pembayaran){
-		$this->db->trans_start();
+		/*$this->db->trans_start();
 		$this->db->query("
 			UPDATE pesanan SET total = (SELECT SUM((harga_stock * kuantitas)) as 'total_order_nof' FROM pesanan_detail WHERE id_pesanan = '".$id_pesanan."'), status = '3', metode_pembayaran = '".$metode_pembayaran."', transaction_id = CASE WHEN metode_pembayaran = '1' THEN CONCAT('OF-".date("y").date("m").date("d")."', id) ELSE CONCAT('ON-".date("y").date("m").date("d")."', id) END WHERE id = '".$id_pesanan."'");
 		$this->db->query("
@@ -191,7 +202,10 @@ class m_order extends CI_Model {
 		else {
 			$this->db->trans_commit();
 			return TRUE;
-		}
+		}*/
+		$this->db->query("CALL PROCcheckOutOrder('ON', ".$id_pesanan.", ".$metode_pembayaran.", '".$ketOrder."', @p5, @p6)");
+		// if ($this->db->query("SELECT @p5 AS 'OUTcd'") == '200') {}
+		return TRUE;
 	}
 
 	public function checkAvailablityStock($id_pesanan, $param){
