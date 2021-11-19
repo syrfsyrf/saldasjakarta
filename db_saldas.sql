@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2021 at 09:43 PM
+-- Generation Time: Nov 19, 2021 at 09:14 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.23
 
@@ -230,15 +230,6 @@ CREATE TABLE `log` (
   `id_user` varchar(11) NOT NULL,
   `insert_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `log`
---
-
-INSERT INTO `log` (`id`, `jenis`, `aksi`, `status`, `ip`, `browser`, `version`, `platform`, `catatan`, `id_user`, `insert_date`) VALUES
-(178, '1', NULL, NULL, '::1', 'Chrome', '96.0.4664.45', 'Windows 10', 'sukses', '3', '2021-11-18 20:37:41'),
-(179, '1', NULL, NULL, '::1', 'Chrome', '96.0.4664.45', 'Windows 10', 'sukses', '4', '2021-11-18 20:41:39'),
-(180, '1', NULL, NULL, '::1', 'Chrome', '96.0.4664.45', 'Windows 10', 'sukses', '2', '2021-11-18 20:43:17');
 
 -- --------------------------------------------------------
 
@@ -479,13 +470,6 @@ CREATE TABLE `report` (
   `generate_by` varchar(11) DEFAULT NULL,
   `insert_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `report`
---
-
-INSERT INTO `report` (`id`, `bulan_tahun`, `tahun`, `total`, `generate_by`, `insert_date`) VALUES
-(15, '0000-00-00', 0000, 0, '3', '2021-11-18 20:40:44');
 
 -- --------------------------------------------------------
 
@@ -756,19 +740,19 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT for table `alamat`
 --
 ALTER TABLE `alamat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `data_user`
 --
 ALTER TABLE `data_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=181;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `mst_jenis_harga`
@@ -798,43 +782,43 @@ ALTER TABLE `mst_metode_pembayaran`
 -- AUTO_INCREMENT for table `mst_produk`
 --
 ALTER TABLE `mst_produk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `mst_user`
 --
 ALTER TABLE `mst_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `order_job`
 --
 ALTER TABLE `order_job`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pesanan`
 --
 ALTER TABLE `pesanan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pesanan_detail`
 --
 ALTER TABLE `pesanan_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `report`
 --
 ALTER TABLE `report`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `stock`
 --
 ALTER TABLE `stock`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tb_berat`
