@@ -3,7 +3,8 @@ var ArrYear = [];
 var ArrNominal = [];
 // [0, 10000, 5000, 15000, 10000, 20000];
 
-base_url = 'http://localhost/saldasjakarta/';
+// base_url = 'http://localhost/saldasjakarta/';
+base_url = 'http://47.254.249.69/saldasjakarta/';
 
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
