@@ -2,7 +2,7 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Detail Stock</h1>
+        <h1 class="h3 mb-0 text-gray-800">Detail Stok</h1>
     </div>
     <div>
         <?php echo $this->session->flashdata('message');?>
@@ -33,7 +33,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="password" class="col-sm-2 col-form-label">Jumlah Stock</label>
+                            <label for="password" class="col-sm-2 col-form-label">Jumlah Stok</label>
                             <div class="col-sm-4">
                                 <input type="text" readonly class="form-control" id="password" name="password" placeholder="..." value="<?php echo $row->jumlah_stok;?>">
                             </div>

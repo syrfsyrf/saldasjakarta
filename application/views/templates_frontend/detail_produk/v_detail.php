@@ -16,15 +16,15 @@
             <p style="color: #000;">Sisa Stok: <?php echo $row->sisa_stok;?></p>
           </div>
         </div>
-        <p><a href="javascript:addOrder('<?php echo $row->id_stock; ?>');" class="btn btn-black py-3 px-5">Add to Cart</a></p>
+        <p><a href="javascript:addOrder('<?php echo $row->id_stock; ?>');" class="btn btn-black py-3 px-5">Tambah Ke Keranjang</a></p>
       </div>
       <div class="col-lg-2">
         <span><div class="toast mt-3">
           <div class="toast-header">
-            Add To Cart
+            Tambah Ke Keranjang
           </div>
           <div class="toast-body">
-            Success
+            Sukses
           </div>
         </div></span>
       </div>

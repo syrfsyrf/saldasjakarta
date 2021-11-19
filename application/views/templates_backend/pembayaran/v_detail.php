@@ -3,7 +3,7 @@
 
 		<!-- Page Heading -->
 		<div class="d-sm-flex align-items-center justify-content-between mb-4">
-			<h1 class="h3 mb-0 text-gray-800">Detail Transaction</h1>
+			<h1 class="h3 mb-0 text-gray-800">Detail Transaksi</h1>
 		</div>
 		<div>
 	        <?php echo $this->session->flashdata('message');?>
@@ -23,7 +23,7 @@
 
 						<div class="card-body">
 							<div class="form-group row">
-								<label for="password" class="col-sm-12 col-form-label">Transaction ID</label>
+								<label for="password" class="col-sm-12 col-form-label">ID Transaksi</label>
 								<div class="col-sm-12">
 									<input type="hidden" required class="form-control" id="id_pesanan" name="id_pesanan" placeholder="..." value="<?php echo $row->id_pesanan;?>">
 									<input type="text" readonly class="form-control" name="transaction_id" id="transaction_id" placeholder="..." value="<?php echo $row->transaction_id;?>">
@@ -40,7 +40,7 @@
 								<div class="col-sm-4">
 									<input type="text" readonly class="form-control" placeholder="..." value="<?php echo $row->status;?>">
 								</div>
-								<label class="col-sm-2 col-form-label">Receipt</label>
+								<label class="col-sm-2 col-form-label">Bukti Pembayaran</label>
 								<div class="col-sm-4">
 									<?php if ($row->file == NULL) { ?>
 										<input type="text" readonly class="form-control" placeholder="..." value="Receipt Not Available">

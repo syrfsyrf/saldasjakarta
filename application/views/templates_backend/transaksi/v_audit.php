@@ -20,18 +20,18 @@
 
                 <div class="card-body">
                     <div class="form-group row">
-                        <label for="user" class="col-sm-2 col-form-label">Date Start</label>
+                        <label for="user" class="col-sm-2 col-form-label">Tanggal Mulai</label>
                         <div class="col-sm-4">
                             <input type="date" class="form-control" id="dateStart" name="dateStart" value="">
                         </div>
-                        <label for="KodeDermaga" class="col-sm-2 col-form-label">Date End</label>
+                        <label for="KodeDermaga" class="col-sm-2 col-form-label">Tanggal Berakhir</label>
                         <div class="col-sm-4">
                             <input type="date" class="form-control" id="dateEnd" name="dateEnd" value="">
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-12">
-                            <button class="btn btn-primary btn-icon-split" onclick="getAuditData()"><span class="text">Search</span></button>
+                            <button class="btn btn-primary btn-icon-split" onclick="getAuditData()"><span class="text">Pencarian</span></button>
                         </div>
                     </div>
                 </div>
@@ -46,8 +46,8 @@
                         <table class="table table-bordered" id="" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>Transaction ID</th>
-                                    <th>Metode</th>
+                                    <th>ID Transaksi</th>
+                                    <th>Metode Pembayaran</th>
                                     <th>Tanggal Pembayaran</th>
                                     <th>Total</th>
                                     <th>Aksi</th>
@@ -56,7 +56,7 @@
                             <tfoot>
                                 <tr>
                                     <th>Transaction ID</th>
-                                    <th>Metode</th>
+                                    <th>Metode Pembayaran</th>
                                     <th>Tanggal Pembayaran</th>
                                     <th>Total</th>
                                     <th>Aksi</th>

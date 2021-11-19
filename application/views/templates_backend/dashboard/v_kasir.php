@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-7">
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Order</h1>
+                <h1 class="h3 mb-0 text-gray-800">Pesanan</h1>
             </div>
             <div class="row">
                 <?php foreach($getKategori->result() as $row): ?>
@@ -36,7 +36,7 @@
         </div>
         <div class="col-md-5">
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Order List</h1>
+                <h1 class="h3 mb-0 text-gray-800">Daftar Pesanan</h1>
             </div>
             <div class="row">
                 <div class="col-md-12">
@@ -60,7 +60,7 @@
                   <button class="btn btn-danger btn-block" onclick="doCancel()"><span class="text">Cancel</span></button>  
               </div>
               <div class="col-md-6">
-                  <button class="btn btn-primary btn-block" onclick="doCheckOut()"><span class="text">Check Out</span></button>  
+                  <button class="btn btn-primary btn-block" onclick="doCheckOut()"><span class="text">Periksa Pesanan</span></button>  
               </div>
           </div>
           <br>

@@ -62,6 +62,82 @@ function getDetailOrder(id, param){
                           '</div>';
                 } else {
                     if (param == 'DETAIL') {
+                        sumOrderDetail(id);
+                        var i;
+                        for(i=0; i<data.length; i++){
+                          html += 
+                          '<div class="cart-row">'+
+                          '<div class="cart-item cart-column">'+
+                          '<div class="p-3 bg-success text-white">'+
+                          '<div class="row">'+
+                          '<div class="col-md-5">'+
+                          ''+data[i].produk+'<br> Rp'+data[i].harga_stock+''+
+                          '</div>'+
+                          '<div class="col-md-3">'+data[i].kuantitas+'</div>'+
+                          '<div class="col-md-3"><span class="cart-price">Rp'+data[i].total_produk+'</span></div>'+
+                          '<div class="col-md-1"></div>'+
+                          '</div>'+
+                          '</div>'+
+                          '</div>'+
+                          '</div>';
+                      }
+                    } else {
+                        sumOrder(id);
+                        var i;
+                        for(i=0; i<data.length; i++){
+                          html += 
+                          '<div class="cart-row">'+
+                          '<div class="cart-item cart-column">'+
+                          '<div class="p-3 bg-success text-white">'+
+                          '<div class="row">'+
+                          '<div class="col-md-5">'+
+                          ''+data[i].produk+'<br> Rp'+data[i].harga_stock+''+
+                          '</div>'+
+                          '<div class="col-md-3">'+data[i].kuantitas+'</div>'+
+                          '<div class="col-md-3"><span class="cart-price">Rp'+data[i].total_produk+'</span></div>'+
+                          '<div class="col-md-1"><a href="#" class="btn-trash" onclick="deleteOrder('+data[i].id+')"><i class="text-white fas fa-trash"></i></a></div>'+
+                          '</div>'+
+                          '</div>'+
+                          '</div>'+
+                          '</div>';
+                      }
+                    }
+
+              }
+              $('#cart_items').html(html);
+          }
+      });
+}
+
+function getDetailOrderCash(id, param){
+    html = '';
+
+    $.ajax({
+        type    : 'ajax',
+        url     : base_url+'data/Data_order/getDetailOrderCash/'+id,
+        async   : true,
+        dataType    : 'json',
+        success : function(data){
+                if (!$.trim(data)){   /*
+                    alert('No Available Stock');*/
+                    // console.log('empty getDetailOrder');
+                        html = 
+                          '<div class="cart-row">'+
+                          '<div class="cart-item cart-column">'+
+                          '<div class="p-3 bg-success text-white">'+
+                          '<div class="row">'+
+                          '<div class="col-md-5">'+
+                          'Empty'+
+                          '</div>'+
+                          '<div class="col-md-3"></div>'+
+                          '<div class="col-md-3"></span></div>'+
+                          '<div class="col-md-1"></div>'+
+                          '</div>'+
+                          '</div>'+
+                          '</div>'+
+                          '</div>';
+                } else {
+                    if (param == 'DETAIL') {
                         sumOrder(id);
                         var i;
                         for(i=0; i<data.length; i++){
@@ -117,7 +193,7 @@ function deleteOrder(param){
         dataType    : 'json',
         data : {id_pesanan:param},
         success : function(data){
-            getDetailOrder();
+            getDetailOrderCash();
             sumOrder(id_pesanan);
         }
     });
@@ -242,7 +318,7 @@ function addOrder(id_stock){
             dataType    : 'json',
             data : {id_stock:id_stock, qty:1},
             success : function(data){
-                getDetailOrder();
+                getDetailOrderCash();
                 // $('#show_log').html(html);
                 // console.log('im here');
             }
@@ -257,6 +333,29 @@ function sumOrder(id){
     $.ajax({
         type    : 'ajax',
         url     : base_url+'data/Data_order/sumOrder/'+id,
+        async   : true,
+        dataType    : 'json',
+        success : function(data){
+                if (!$.trim(data)){   /*
+                    alert('No Available Stock');*/
+                    // kategori = 'No Available Stock';
+                } else {
+                    var i, id;
+                    for(i=0; i<data.length; i++){
+                        total_order = data[i].total_order;
+                        total_order_nof = data[i].total_order_nof;
+                    }
+                }
+                document.getElementById("totalOrder").innerHTML = 'Rp'+total_order;
+            }
+        });
+}
+
+function sumOrderDetail(id){
+    html = '';
+    $.ajax({
+        type    : 'ajax',
+        url     : base_url+'data/Data_order/sumOrderDetail/'+id,
         async   : true,
         dataType    : 'json',
         success : function(data){
@@ -329,7 +428,7 @@ function getTransaksi(id){
                     '<a href="#" class="dropdown-toggle btn btn-info btn-circle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'+
                     '<i class="fas fa-ellipsis-v fa-sm fa-fw "></i></a>'+
                     '<div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">'+
-                    '<a class="dropdown-item" href="'+base_url+'Transaksi/Detail/'+data[i].id+'">Detail</a>'+
+                    '<a class="dropdown-item" href="'+base_url+'Pembayaran/detail/'+data[i].id+'">Detail</a>'+
                     '</div>'+
                     '</div>'+
                     '</td>'+

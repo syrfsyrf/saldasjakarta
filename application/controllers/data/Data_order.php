@@ -37,8 +37,14 @@ class Data_order extends CI_Controller{
         echo json_encode($hasil);
     }
 
-    public function getDetailOrder(){
-        $hasil = $this->m_order->getDetailOrder();
+    //Nambahin param 20/11/2021
+    public function getDetailOrderCash(){
+        $hasil = $this->m_order->getDetailOrderCash();
+        echo json_encode($hasil);
+    }
+
+    public function getDetailOrder($id){
+        $hasil = $this->m_order->getDetailOrder($id);
         echo json_encode($hasil);
     }
 
@@ -93,6 +99,11 @@ class Data_order extends CI_Controller{
 
     public function sumOrder(){
         $hasil = $this->m_order->sumOrder();
+        echo json_encode($hasil);
+    }
+
+    public function sumOrderDetail($id){
+        $hasil = $this->m_order->sumOrderDet($id);
         echo json_encode($hasil);
     }
 
@@ -193,8 +204,11 @@ class Data_order extends CI_Controller{
         );
         $this->load->library('upload', $config);
         if (!$this->upload->do_upload('file_receipt')) {
-            $status_sukses_file = 'GAGAL';
-            echo $status_sukses_file;
+            $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible">
+                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                   <i class="icon fas fa-times"></i> Upload Bukti Transfer Gagal
+                   </div>');
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
         } else {
             $filename = $this->upload->data('file_name');
             $status_sukses_file = 'SUKSES';

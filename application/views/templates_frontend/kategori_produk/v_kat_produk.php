@@ -8,7 +8,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-10 mb-5 text-center">
                     <ul class="product-category">
-                        <li><a href="javascript:;" class="active">All</a></li>
+                        <li><a href="javascript:;" class="active">Semua Kategori</a></li>
                         <?php foreach($getKategori->result() as $row): ?>
                             <li><a href="javascript:getOrder(<?php echo $row->id;?>, 'SPESIFIK');" class="active"><?php echo $row->jenis;?></a></li>
                         <?php endforeach; ?>

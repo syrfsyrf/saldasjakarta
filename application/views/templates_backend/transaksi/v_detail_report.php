@@ -12,14 +12,14 @@
             <div class="card shadow mb-4">
 
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Report Pendapatan</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Laporan Pendapatan</h6>
                 </div>
 
                 <div class="card-body">
                     <div class="form-group row">
-                        <label for="user" class="col-sm-2 col-form-label">Total Report</label>
+                        <label for="user" class="col-sm-2 col-form-label">Total Laporan</label>
                         <div class="col-sm-4">
-                            <input type="type" class="form-control" id="monthReport" name="monthReport" value="Rp <?php foreach($getReportDetailD->result() as $row): echo $row->dtotal; endforeach; ?>">
+                            <input type="type" readonly class="form-control" id="monthReport" name="monthReport" value="Rp <?php foreach($getReportDetailD->result() as $row): echo $row->dtotal; endforeach; ?>">
                         </div>
                     </div>
                 </div>
@@ -27,14 +27,14 @@
             </div>
             <div class="card shadow mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Report</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Laporan</h6>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataReport" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>Insert Date</th>
+                                    <th>Masukan Tanggal</th>
                                     <th>Metode Pembayaran</th>
                                     <th>Tanggal Pembayaran</th>
                                     <th>Total</th>
@@ -60,7 +60,7 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Insert Date</th>
+                                    <th>Masukan Tanggal</th>
                                     <th>Metode Pembayaran</th>
                                     <th>Tanggal Pembayaran</th>
                                     <th>Total</th>

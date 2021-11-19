@@ -9,12 +9,12 @@
 					<table class="table">
 						<thead class="thead-primary">
 							<tr class="text-center">
-								<th>Transaction ID</th>
-								<th>Transaction Status</th>
-								<th>Transaction Date</th>
-								<th>Payment Method</th>
-								<th>Approved Date</th>
-								<th>Receipt</th>
+								<th>ID Transaksi</th>
+								<th>Status Transaksi</th>
+								<th>Tanggal Transaksi</th>
+								<th>Metode Pembayaran</th>
+								<th>Tanggal Disetujui</th>
+								<th>Bukti Pembayaran</th>
 								<th>Total</th>
 								<th>Detail</th>
 							</tr>

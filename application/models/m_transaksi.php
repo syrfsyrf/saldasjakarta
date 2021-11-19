@@ -14,7 +14,7 @@ class m_transaksi extends CI_Model {
 	}
 
 	public function getAuditData($dateStart, $dateEnd) {
-			$hasil = $this->db->query("SELECT id, transaction_id, (SELECT jenis FROM mst_metode_pembayaran WHERE id = metode_pembayaran) AS 'metode_pembayaran', DATE_FORMAT(tgl_pembayaran, '%d %M %Y') AS 'tgl_pembayaran', total, FORMAT(total, 'c') AS 'dtotal' FROM pesanan WHERE status = '1' AND ((DATE(tgl_pembayaran) BETWEEN '".$dateStart."' AND '".$dateEnd."')");
+			$hasil = $this->db->query("SELECT id, transaction_id, (SELECT jenis FROM mst_metode_pembayaran WHERE id = metode_pembayaran) AS 'metode_pembayaran', DATE_FORMAT(tgl_pembayaran, '%d %M %Y') AS 'tgl_pembayaran', total, FORMAT(total, 'c') AS 'dtotal' FROM pesanan WHERE status = '1' AND ((DATE(tgl_pembayaran) BETWEEN '".$dateStart."' AND '".$dateEnd."'))");
 			return $hasil->result();
 	}
 

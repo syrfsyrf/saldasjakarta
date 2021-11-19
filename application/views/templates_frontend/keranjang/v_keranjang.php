@@ -31,7 +31,7 @@
 								<th>&nbsp;</th>
 								<th>&nbsp;</th>
 								<th>&nbsp;</th>
-								<th><a href="<?php echo base_url('/main/bayar'); ?>" class="btn btn-primary py-3 px-4" id="checkbtn">Check Out</a></th>
+								<th><a href="<?php echo base_url('/main/bayar'); ?>" class="btn btn-primary py-3 px-4" id="checkbtn">Bayar</a></th>
 							</tr>
 						</tfoot>
 					</table>

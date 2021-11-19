@@ -11,18 +11,18 @@
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
               <h2 class="ftco-heading-2">Toko Daging Saldas Jakarta</h2>
-              <p>Menyediakan Berbagai Macam Daging Sapi, Daging Ayam, Ikan, Dan Daging Olahan Yang Halal</p>
+              <p>Menyediakan Berbagai Macam Daging Sapi, Daging Ayam, Ikan, Frozen Food dan Daging Olahan Rumahan Yang Halal.</p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                <li class="ftco-animate"><a target="_blank" href="https://api.whatsapp.com/send?phone=628121610680"><span class="icon-whatsapp"></span></a></li>
+                <li class="ftco-animate"><a target="_blank" href="https://api.whatsapp.com/send?phone=628121610680&text=Hallo%20Admin%20Toko%20Daging%20Saldas%20Jakarta%2C%20Mohon%20dibantu%20untuk%20melakukan%20pesanan.%20Terima%20kasih"><span class="icon-whatsapp"></span></a></li>
                 <li class="ftco-animate"><a target="_blank" href="https://www.instagram.com/tokodagingsaldasjakarta/"><span class="icon-instagram"></span></a></li>
               </ul>
             </div>
           </div>
           <div class="col-md">
             <div class="ftco-footer-widget mb-4 ml-md-5">
-              <h2 class="ftco-heading-2">Beranda</h2>
+              <h2><a target="_blank" href="<?php echo base_url('/main'); ?>" class="ftco-heading-2">Beranda</a></h2>
               <ul class="list-unstyled">
-                <li><a target="_blank" href="<?php echo base_url('/main'); ?>" class="py-2 d-block">Belanja</a></li>
+                <li><a target="_blank" href="<?php echo base_url('/main/kategori_produk'); ?>" class="py-2 d-block">Belanja</a></li>
                 <li><a target="_blank" href="<?php echo base_url('/main/tentang_kami'); ?>" class="py-2 d-block">Tentang Kami</a></li>
                 <li><a target="_blank" href="<?php echo base_url('/main/kontak_kami'); ?>" class="py-2 d-block">Kontak Kami</a></li>
               </ul>
@@ -34,9 +34,10 @@
             	<h2 class="ftco-heading-2">Apakah anda memiliki pertanyaan? Silahkan Hubungi Kami :)</h2>
             	<div class="block-23 mb-3">
 	              <ul>
-	                <li><span class="icon icon-map-marker"></span><span class="text">JL. Desa Putra No. 6B RT 06/05 Kelurahan Srengseng Sawah Kecamatan Jagakarsa Jakarta Selatan 12630</span></li>
-	                <li><a target="_blank" href="https://api.whatsapp.com/send?phone=628121610680"><span class="icon icon-phone"></span><span class="text">08121610680</span></a></li>
-	                <li><a target="_blank" href="tokodagingsaldas@gmail.com"><span class="icon icon-envelope"></span><span class="text">tokodagingsaldas@gmail.com</span></a></li>
+	                <li><span class="icon icon-map-marker"></span><span class="text">JL. Desa Putra No. 6B RT 06/05 Kelurahan Srengseng Sawah Kecamatan Jagakarsa Jakarta Selatan 12630</span></li><br>
+	                <li><a target="_blank" href="https://api.whatsapp.com/send?phone=6287781720092&text=Hallo%20Admin%20Toko%20Daging%20Saldas%20Jakarta%2C%20Mohon%20dibantu%20untuk%20melakukan%20pesanan.%20Terima%20kasih"><span class="icon icon-whatsapp"></span><span class="text">087781720092</span></a></li>
+                  <li><a target="_blank" href="https://www.instagram.com/tokodagingsaldasjakarta/"><span class="icon icon-instagram"></span><span class="text">tokodagingsaldasjakarta</span></a></li>
+	                <li><a target="_blank" href="mailto:tokodagingsaldas@gmail.com"><span class="icon icon-envelope"></span><span class="text">tokodagingsaldas@gmail.com</span></a></li>
 	              </ul>
 	            </div>
             </div>
@@ -46,7 +47,7 @@
           <div class="col-md-12 text-center">
 
             <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Created <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="http://47.254.249.69/" target="_blank">Syarief Hidayatullah</a>
+						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved 2021 | Created <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="http://47.254.249.69/" target="_blank">Syarief Hidayatullah</a>
 						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 						</p>
           </div>

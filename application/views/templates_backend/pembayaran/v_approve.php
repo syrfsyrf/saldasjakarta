@@ -3,7 +3,7 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Approve</h1>
+        <h1 class="h3 mb-0 text-gray-800">Disetujui</h1>
     </div>
 
     <!-- Content Row -->
@@ -16,7 +16,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Approved</div>
+                            Disetujui</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?php foreach($getAprovedTrans->result() as $row): echo $row->count_approved; endforeach;?></div>
                         </div>
                         <div class="col-auto">
@@ -34,7 +34,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Pending</div>
+                            Menunggu Pembayaran</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?php foreach($getPendingTrans->result() as $row): echo $row->count_pending; endforeach;?></div>
                         </div>
                         <div class="col-auto">
@@ -52,7 +52,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Rejected</div>
+                            Pesanan Ditolak</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?php foreach($getRejectedTrans->result() as $row): echo $row->count_rejected; endforeach;?></div>
                         </div>
                         <div class="col-auto">

@@ -5,10 +5,11 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; All rights reserved 2021 | Created <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="http://47.254.249.69/" target="_blank">Syarief Hidayatullah</a></span>
                     </div>
                 </div>
             </footer>
+            
             <!-- End of Footer -->
 
         </div>

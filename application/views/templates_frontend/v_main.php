@@ -6,7 +6,7 @@
 				<div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
 					<div class="col-md-12 ftco-animate text-center">
-						<h1 class="mb-2">Menyediakan Berbagai Macam Daging Sapi, Daging Ayam, Ikan, Dan Daging Olahan Yang &amp; Halal</h1>
+						<h1 class="mb-2">Menyediakan Berbagai Macam Daging Sapi, Daging Ayam, Ikan, &amp; Daging Olahan Yang Halal</h1>
 						<h2 class="subheading mb-4">Kita Mengirimkan Daging Berkualitas dan &amp; Halal</h2>
 					</div>
 				</div>
@@ -19,8 +19,8 @@
 				<div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
 					<div class="col-sm-12 ftco-animate text-center">
-						<h1 class="mb-2">100% Daging &amp; Halal</h1>
-						<h2 class="subheading mb-4">Kita Mengirimkan Daging Berkualitas dan &amp; Halal</h2>
+						<h1 class="mb-2">100% Produk Halal</h1>
+						<h2 class="subheading mb-4">Kami Mengirimkan Daging Berkualitas &amp; Halal</h2>
 						<p><a href="<?php echo base_url('Main/kategori_produk'); ?>" class="btn btn-primary">Lihat Detail</a></p>
 					</div>
 

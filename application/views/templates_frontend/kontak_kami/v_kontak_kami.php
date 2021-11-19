@@ -29,8 +29,8 @@
   </div>
   <div class="col-md-3 d-flex">
    <div class="info bg-white p-4">
-     <p><span>Telpon:</span> <a href="tel://08121610680">
-      <br>08121610680</a></p>
+     <p><span>Telpon:</span> <a href="tel://087781720092">
+      <br>087781720092</a></p>
     </div>
   </div>
   <div class="col-md-3 d-flex">
@@ -41,7 +41,7 @@
   </div>
   <div class="col-md-3 d-flex">
    <div class="info bg-white p-4">
-     <p><span>Website:</span> <a href="http://47.254.249.69/">
+     <p><span>Website:</span> <a href="http://47.254.249.69/saldasjakarta/">
       <br>www.tokodagingsaldas<br>jakarta.com</a></p>
     </div>
   </div>

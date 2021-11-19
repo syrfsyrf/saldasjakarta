@@ -33,11 +33,11 @@
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="password" class="col-sm-2 col-form-label">Created By</label>
+							<label for="password" class="col-sm-2 col-form-label">Dibuat Oleh</label>
 							<div class="col-sm-4">
 								<input type="text" readonly class="form-control" id="password" name="password" placeholder="..." value="<?php echo $row->created_by;?>">
 							</div>
-                            <label for="password" class="col-sm-2 col-form-label">Insert Date</label>
+                            <label for="password" class="col-sm-2 col-form-label">Masukkan Tanggal</label>
 							<div class="col-sm-4">
 								<input type="text" readonly class="form-control" id="password" name="password" placeholder="..." value="<?php echo $row->insert_date;?>">
 							</div>

@@ -40,7 +40,7 @@
                 <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
                     <form action="<?php echo base_url('Login/do_reset'); ?>" method="post" class="info">
                     <div class="cart-total mb-3">
-                        <h3>Reset Password</h3>
+                        <h3>Buat Ulang Password Anda</h3>
                         <?php echo $this->session->flashdata('message');?>
                             <div class="form-group">
                                 <label for="">Password</label>
@@ -51,7 +51,7 @@
                                 <input type="password" required class="form-control text-left px-3" name="resetpass2" placeholder="">
                             </div>
                         
-                    <p><button type="submit" class="btn btn-primary py-3 px-4">Reset Password</button></p>
+                    <p><button type="submit" class="btn btn-primary py-3 px-4">Buat Ulang Password Anda</button></p>
                     </div>
                 </form>
                 </div>

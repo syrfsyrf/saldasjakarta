@@ -49,10 +49,17 @@ class m_order extends CI_Model {
 		return $hasil->result();
 	}
 
-	public function getDetailOrder() {
+	public function getDetailOrderCash() {
 		$hasil = $this->db->query("SELECT a.id as 'id', a.id_pesanan as 'id_pesanan', a.id_produk, FORMAT(a.harga_stock, 'c') as 'harga_stock', a.kuantitas, 
 			FORMAT((a.harga_stock * a.kuantitas), 'c') as 'total_produk', b.file, b.path, b.nama as 'produk' 
 			FROM pesanan_detail a JOIN mst_produk b ON a.id_produk = b.id JOIN stock c ON a.id_stock = c.id WHERE a.id_pesanan = (SELECT id FROM pesanan WHERE id_user = '".$_SESSION['logged_in']['id_user']."' ORDER BY insert_date DESC LIMIT 1)");
+		return $hasil->result();
+	}
+
+	public function getDetailOrder($id) {
+		$hasil = $this->db->query("SELECT a.id as 'id', a.id_pesanan as 'id_pesanan', a.id_produk, FORMAT(a.harga_stock, 'c') as 'harga_stock', a.kuantitas, 
+			FORMAT((a.harga_stock * a.kuantitas), 'c') as 'total_produk', b.file, b.path, b.nama as 'produk' 
+			FROM pesanan_detail a JOIN mst_produk b ON a.id_produk = b.id JOIN stock c ON a.id_stock = c.id WHERE a.id_pesanan = '".$id."'");
 		return $hasil->result();
 	}
 
@@ -126,6 +133,11 @@ class m_order extends CI_Model {
 
 	public function sumOrder() {
 		$hasil = $this->db->query("SELECT CASE WHEN FORMAT(SUM((harga_stock * kuantitas)), 'c') IS NULL THEN 0 ELSE FORMAT(SUM((harga_stock * kuantitas)), 'c') END AS 'total_order', SUM((harga_stock * kuantitas)) as 'total_order_nof' FROM pesanan_detail WHERE id_pesanan = (SELECT id FROM pesanan WHERE id_user = '".$_SESSION['logged_in']['id_user']."' ORDER BY insert_date DESC LIMIT 1)");
+		return $hasil->result();
+	}
+
+	public function sumOrderDet($id) {
+		$hasil = $this->db->query("SELECT CASE WHEN FORMAT(SUM((harga_stock * kuantitas)), 'c') IS NULL THEN 0 ELSE FORMAT(SUM((harga_stock * kuantitas)), 'c') END AS 'total_order', SUM((harga_stock * kuantitas)) as 'total_order_nof' FROM pesanan_detail WHERE id_pesanan = '".$id."'");
 		return $hasil->result();
 	}
 

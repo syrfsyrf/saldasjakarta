@@ -40,14 +40,14 @@
       <div class="row d-flex">
        <div class="col-md pr-4 d-flex topper align-items-center">
         <div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
-        <span class="text text-lowercase">08121610680</span>
+        <span class="text text-lowercase">087781720092</span>
       </div>
       <div class="col-md pr-4 d-flex topper align-items-center">
         <div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
         <span class="text text-lowercase">tokodagingsaldas@gmail.com</span>
       </div>
       <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-        <span class="text text-lowercase">Produk Kami Berkualitas dan &amp; Halal</span>
+        <span class="text text-lowercase">Produk Kami Berkualitas &amp; Halal</span>
       </div>
     </div>
   </div>
@@ -67,7 +67,7 @@
        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Kategori Produk</a>
           <div class="dropdown-menu" aria-labelledby="dropdown04">
-            <a class="dropdown-item" href="<?php echo base_url('Main/kategori_produk'); ?>">All Category</a>
+            <a class="dropdown-item" href="<?php echo base_url('Main/kategori_produk'); ?>">Semua Kategori</a>
             <?php foreach($getKategori->result() as $row): ?>
               <a class="dropdown-item" href="<?php echo base_url('Main/kategori_produk/').$row->id; ?>"><?php echo $row->jenis;?></a>
             <?php endforeach; ?>
@@ -78,8 +78,8 @@
        <li class="nav-item dropdown cta cta-colored">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icon-shopping_cart" id="total_cart"></span></a>
         <div class="dropdown-menu" aria-labelledby="dropdown04">
-          <a class="dropdown-item" href="<?php echo base_url('Main/keranjang'); ?>">Cart</a>
-          <a class="dropdown-item" href="<?php echo base_url('Main/myOrder'); ?>">My Order</a>
+          <a class="dropdown-item" href="<?php echo base_url('Main/keranjang'); ?>">Keranjang</a>
+          <a class="dropdown-item" href="<?php echo base_url('Main/myOrder'); ?>">Pesanan Saya</a>
         </div>
      </li>
      <?php if(!isset($_SESSION['logged_in']['username'])){ ?>

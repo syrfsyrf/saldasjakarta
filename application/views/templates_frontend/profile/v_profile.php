@@ -4,7 +4,7 @@
 			<div class="row justify-content-center">
 				<div class="col-xl-12 ftco-animate">
 					<form action="#" class="billing-form">
-						<h3 class="mb-4 billing-heading">Profile Details</h3>
+						<h3 class="mb-4 billing-heading">Informasi Profil</h3>
 						<div class="row align-items-end">
 							<?php foreach($getUserProfile->result() as $row): ?>
 								<div class="col-md-6">

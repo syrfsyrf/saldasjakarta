@@ -2,7 +2,7 @@ function getDetailOrder(param){
 	html = '';
 	$.ajax({
 		type    : 'ajax',
-		url     : base_url+'data/Data_order/getDetailOrder',
+		url     : base_url+'data/Data_order/getDetailOrderCash',
 		async   : true,
 		dataType    : 'json',
 		success : function(data){
