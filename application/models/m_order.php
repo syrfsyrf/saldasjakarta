@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class m_order extends CI_Model {
+class M_order extends CI_Model {
 
 	public function getKategori($param) {
 		$hasil = $this->db->query("SELECT id, jenis FROM mst_kategori WHERE is_active = '1'");

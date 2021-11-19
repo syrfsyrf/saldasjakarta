@@ -1,6 +1,6 @@
 <?php
 
-class m_login extends CI_model{
+class M_login extends CI_model{
 
     public function check_user($user){
         return $this->db->get_where('mst_user', $user);

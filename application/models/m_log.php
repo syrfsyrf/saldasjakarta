@@ -1,6 +1,6 @@
 <?php
 
-class m_log extends CI_model{
+class M_log extends CI_model{
 
     public function insert_log($data){
     	$this->load->library('user_agent');

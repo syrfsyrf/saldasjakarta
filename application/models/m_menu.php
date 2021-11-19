@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class m_menu extends CI_Model {
+class M_menu extends CI_Model {
 
 	public function GetMenuParent()
 	{

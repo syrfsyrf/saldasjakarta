@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class m_dashboard extends CI_Model {
+class M_dashboard extends CI_Model {
 
 	public function getDistinctMetodePembayaran() {
 		$hasil = $this->db->query("SELECT id, jenis FROM mst_metode_pembayaran WHERE is_active = '1' ORDER BY id ASC");

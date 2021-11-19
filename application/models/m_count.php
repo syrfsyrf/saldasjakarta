@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class m_count extends CI_Model {
+class M_count extends CI_Model {
 
 	public function getCountTotalProd() {
 		$hasil = $this->db->query("SELECT COUNT(*) AS 'total_produk' FROM mst_produk");

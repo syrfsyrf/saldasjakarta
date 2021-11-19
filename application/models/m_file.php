@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class m_file extends CI_Model {
+class M_file extends CI_Model {
 
 	public function updateReceipt($id_pesanan, $file, $directory){
 		$this->db->trans_start();

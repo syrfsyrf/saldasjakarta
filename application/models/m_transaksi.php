@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class m_transaksi extends CI_Model {
+class M_transaksi extends CI_Model {
 
 	public function getTransaksi($id = FALSE, $param = FALSE) {
 		if ($id != NULL && $param == 'DETAIL') {
